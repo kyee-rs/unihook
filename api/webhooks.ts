@@ -34,3 +34,4 @@ app.post("/webhook/:token", (req, res) => {
     res.send("ok");
 });
 export = app;
+// TEST TOKEN: 5718541363:AAExrzi1bumzgPIdZK1LohO089tqsyweZqI
