@@ -1,22 +1,25 @@
 import { Conversation, ConversationFlavor, conversations, createConversation } from "@grammyjs/conversations";
 import { PrismaClient } from "@prisma/client";
 import { createHash } from "crypto";
-import { Bot, Context, session } from "grammy";
+import { Bot, Context, InlineKeyboard, session } from "grammy";
 const database = new PrismaClient();
 type MyContext = Context & ConversationFlavor;
 type MyConversation = Conversation<MyContext>;
 
-async function set(conversation: MyConversation, ctx: MyContext) {
+async function add(conversation: MyConversation, ctx: MyContext) {
     if (!(await database.user.findUnique({ where: { id: ctx.from?.id } }))) {
         return await ctx.reply("You are not registered. Please use /start to register.");
     }
 
     await ctx.reply(
         "Please send me the pattern you want to add. Use /cancel to cancel.\n\nExample: `New alert from Webhook {data.webhook_name}`",
+        { parse_mode: "Markdown" },
     );
     const pattern = await conversation.waitFor(":text");
     if (!pattern.message?.text) return;
-    await ctx.reply("Please send me the webhook ID you want to add this pattern to. \n\nExample: `my-webhook`");
+    await ctx.reply("Please send me the webhook ID you want to add this pattern to. \n\nExample: `my-webhook`", {
+        parse_mode: "Markdown",
+    });
     const id = await conversation.waitFor(":text");
     if (!id.message?.text) return;
     if (await database.pattern.findUnique({ where: { id: id.message?.text } })) {
@@ -59,27 +62,20 @@ bot.use(
 );
 
 bot.use(conversations());
-bot.use(createConversation(set));
+bot.use(createConversation(add));
 
 bot.command("start", async (ctx) => {
-    // await ctx.reply(
-    //     "Hello, I am a GitGuardian helper bot! I can help you to protect your GitHub repositories from secrets leaks. To get started, please follow the instructions: \n" +
-    //         "1. Go to https://gitguardian.com/ and sign up.\n" +
-    //         "2. Go to https://dashboard.gitguardian.com/integrations and create a new webhook integration.\n" +
-    //         "3. Copy the webhook URL from next message and paste it in the field below.\n" +
-    //         "4. Save and send test message.",
-    // );
-    // await ctx.reply(
-    //     "https://hook.ieljit.lol/webhook/" +
-    //         ctx.from?.id +
-    //         "/" +
-    //         createHash("sha256")
-    //             .update(ctx.from?.id + process.env.WEBHOOK_SECRET!)
-    //             .digest("hex"),
-    // );
+    const inline = new InlineKeyboard().url("Source code", "https://github.com/voxelin/universalwebhook");
+    await ctx.reply(
+        "Welcome! I am Universal Webhook Bot. I can send you messages when a webhook is triggered. To get started, please use /register to add your account to a Database.",
+        { reply_to_message_id: ctx.message?.message_id, reply_markup: inline },
+    );
+});
+
+bot.command("register", async (ctx) => {
     await ctx.reply("Registering...");
     if (await database.user.findUnique({ where: { id: ctx.from?.id } })) {
-        return await ctx.reply("You are already registered.");
+        return await ctx.reply("You are already registered. Use /add to add a pattern.");
     }
     await database.user.create({
         data: {
@@ -87,11 +83,42 @@ bot.command("start", async (ctx) => {
         },
     });
     await database.$disconnect();
-    await ctx.reply("Registered!");
+    await ctx.reply("Registered! Use /add to add a pattern.");
 });
 
-bot.command("set", async (ctx) => {
-    await ctx.conversation.enter("set");
+bot.command("add", async (ctx) => {
+    await ctx.conversation.enter("add");
+});
+
+bot.command("list", async (ctx) => {
+    const patterns = await database.pattern.findMany({
+        where: {
+            User: {
+                id: ctx.from?.id,
+            },
+        },
+    });
+    await database.$disconnect();
+    if (patterns.length === 0) {
+        return await ctx.reply("You have no patterns. Use /add to add a pattern.");
+    }
+    let text = "Your patterns:\n\n";
+    for (const pattern of patterns) {
+        text += `Pattern: ${pattern.pattern}\nWebhook ID: ${pattern.id}\n\n`;
+    }
+    await ctx.reply(text);
+});
+
+bot.command("deleteAll", async (ctx) => {
+    await database.pattern.deleteMany({
+        where: {
+            User: {
+                id: ctx.from?.id,
+            },
+        },
+    });
+    await database.$disconnect();
+    await ctx.reply("All patterns deleted! You can now use /list to see all your patterns.");
 });
 
 bot.command("cancel", async (ctx) => {
