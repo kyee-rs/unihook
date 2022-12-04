@@ -1,9 +1,9 @@
 {
-    "name": "gitguardian-telegram",
+    "name": "unihook",
     "version": "0.0.1-prealpha",
-    "description": "GitGuardian Telegram(Webhook) Integration",
+    "description": "Telegram Webhook Integration",
     "main": "index.js",
-    "repository": "https://github.com/voxelin/gitguardian.git",
+    "repository": "https://github.com/voxelin/unihook.git",
     "author": "Jenny Poulson",
     "license": "MIT",
     "scripts": {

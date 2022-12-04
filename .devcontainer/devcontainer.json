@@ -2,7 +2,11 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:18-buster"
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:18-buster",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/digitalocean-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/prisma:1": {}
+	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
