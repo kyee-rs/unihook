@@ -37,8 +37,23 @@ app.post("/:id/:token/:hookid", (req, res) => {
                     if (matches) {
                         for (const match of matches) {
                             const key = match.replace("{", "").replace("}", "");
-                            const value = data[key] || "<undefined_value>";
-                            message = message.replace(match, value);
+                            if (key.includes(".")) {
+                                const keys = key.split(".");
+                                let value = data;
+                                for (const key of keys) {
+                                    value = value[key] || "";
+                                }
+                                message = message.replace(match, value);
+                            } else if (key.includes("[")) {
+                                const keys = key.split("[");
+                                let value = data;
+                                for (const key of keys) {
+                                    value = value[key.replace("]", "")];
+                                }
+                                message = message.replace(match, value || "");
+                            } else {
+                                message = message.replace(match, data[key] || "<undefined>");
+                            }
                         }
                     }
                     bot.api.sendMessage(req.params.id, message);
