@@ -40,7 +40,7 @@ async function add(conversation: MyConversation, ctx: MyContext) {
     await ctx.reply("Pattern added! You can now use /list to see all your patterns.");
     await ctx.reply(
         "URL: " +
-            "http://localhost:3000/" +
+            "https://hook.ieljit.lol/" +
             ctx.from?.id +
             "/" +
             createHash("sha256")
@@ -51,6 +51,23 @@ async function add(conversation: MyConversation, ctx: MyContext) {
     );
 }
 
+async function dlt(conversation: MyConversation, ctx: MyContext) {
+    if (!(await database.user.findUnique({ where: { id: ctx.from?.id } }))) {
+        return await ctx.reply("You are not registered. Please use /start to register.");
+    }
+
+    await ctx.reply("Please send me the webhook ID you want to delete. \n\nExample: `my-webhook`", {
+        parse_mode: "Markdown",
+    });
+    const id = await conversation.waitFor(":text");
+    if (!id.message?.text) return;
+    if (!(await database.pattern.findUnique({ where: { id: id.message?.text } }))) {
+        return await ctx.reply("This webhook does not exist.");
+    }
+    await database.pattern.delete({ where: { id: id.message?.text } });
+    await database.$disconnect();
+    await ctx.reply("Pattern deleted! You can now use /list to see all your patterns.");
+}
 export const bot = new Bot<MyContext>(process.env.BOT_TOKEN!);
 
 bot.use(
@@ -63,6 +80,7 @@ bot.use(
 
 bot.use(conversations());
 bot.use(createConversation(add));
+bot.use(createConversation(dlt));
 
 bot.command("start", async (ctx) => {
     const inline = new InlineKeyboard().url("Source code", "https://github.com/voxelin/universalwebhook");
@@ -119,6 +137,10 @@ bot.command("deleteAll", async (ctx) => {
     });
     await database.$disconnect();
     await ctx.reply("All patterns deleted! You can now use /list to see all your patterns.");
+});
+
+bot.command("delete", async (ctx) => {
+    await ctx.conversation.enter("dlt");
 });
 
 bot.command("cancel", async (ctx) => {
