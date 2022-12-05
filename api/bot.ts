@@ -18,5 +18,6 @@ bot.use(createConversation(add));
 bot.use(createConversation(dlt));
 
 bot.on("message", async (ctx) => {
+    console.log(ctx);
     await bot.handleCommand(ctx, ctx.message.text!);
 });

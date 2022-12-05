@@ -23,10 +23,10 @@ app.post("/:id/:token/:hookid", (req, res) => {
         return res.status(400).send("Invalid token");
     const data = req.body;
     if (!data) return res.status(400).send("Missing payload");
-    database.user.findUnique({ where: { id: parseInt(req.params.id) } }).then((user) => {
+    database.getUser(parseInt(req.params.id)).then((user) => {
         if (!user) return res.status(400).send("Invalid user");
-        database.pattern
-            .findUnique({ where: { id: req.params.hookid } })
+        database
+            .getPattern(req.params.hookid)
             .then((webhook) => {
                 if (!webhook) return res.status(400).send("Invalid webhook");
                 let message = webhook.pattern;
@@ -62,10 +62,10 @@ app.post("/:id/:token/:hookid", (req, res) => {
                     res.status(500).send("Internal server error");
                 }
             })
-            .then(() => database.$disconnect())
+            .then(() => database.close())
             .catch(() => {
                 res.status(500).send("Internal server error");
-                database.$disconnect();
+                database.close();
             });
     });
 });
