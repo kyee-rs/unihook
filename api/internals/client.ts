@@ -1,17 +1,30 @@
 import { autoRetry } from "@grammyjs/auto-retry";
+import { conversations, createConversation } from "@grammyjs/conversations";
 import { readdirSync } from "fs";
-import { Bot, BotConfig, Context } from "grammy";
+import { Bot, BotConfig, session } from "grammy";
 import { MyContext } from "../../types/bot";
 import { bot } from "../bot";
 import Command from "../commands";
+import { add, dlt } from "./conversations";
 
-export class CustomClient<C extends Context = MyContext> extends Bot<C> {
+export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
     public commands: Command[] = [];
     constructor(token: string, config?: BotConfig<C>) {
         super(token, config);
     }
     public prepate() {
         this.api.config.use(autoRetry());
+        this.use(
+            session({
+                initial() {
+                    return {};
+                },
+            }),
+        );
+        bot.use(conversations());
+        bot.use(createConversation(add));
+        bot.use(createConversation(dlt));
+
         readdirSync("./dist/commands").forEach(async (file) => {
             if (file.endsWith(".js")) {
                 const data: Command = (await import(`../commands/${file}`)).default;
@@ -19,7 +32,7 @@ export class CustomClient<C extends Context = MyContext> extends Bot<C> {
             }
         });
     }
-    public async handleCommand(ctx: C, command?: string) {
+    public async handleCommand(ctx: C, command: string) {
         if (!command) throw new Error("Command is undefined");
         if (command.startsWith("/")) command = command.slice(1);
         if (command.includes("@")) {
