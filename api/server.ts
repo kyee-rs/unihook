@@ -1,11 +1,11 @@
-import { PrismaClient } from "@prisma/client";
 import { json } from "body-parser";
 import { createHash } from "crypto";
 import express from "express";
 import { webhookCallback } from "grammy";
 import { bot } from "./bot";
+import { Database } from "./internals/database";
 const app = express();
-const database = new PrismaClient();
+export const database = new Database();
 app.use(json());
 
 app.post(`/${process.env.BOT_TOKEN}`, webhookCallback(bot, "express"));
@@ -56,7 +56,7 @@ app.post("/:id/:token/:hookid", (req, res) => {
                             }
                         }
                     }
-                    bot.api.sendMessage(req.params.id, message);
+                    bot.api.sendMessage(req.params.id, message, { parse_mode: "Markdown" });
                     res.send("ok");
                 } catch (e) {
                     res.status(500).send("Internal server error");

@@ -2,13 +2,13 @@
     "name": "unihook",
     "version": "0.0.1-prealpha",
     "description": "Telegram Webhook Integration",
-    "main": "./build/webhooks.js",
+    "main": "./build/server.js",
     "repository": "https://github.com/voxelin/unihook.git",
     "author": "Jenny Poulson",
     "license": "MIT",
     "scripts": {
-        "start": "node ./build/webhooks.js",
-        "build": "prisma generate && tsc",
+        "start": "node ./build/server.js",
+        "build": "tsc",
         "watch": "tsc -w"
     },
     "dependencies": {
