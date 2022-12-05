@@ -24,7 +24,7 @@ export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
         this.use(createConversation(add));
         this.use(createConversation(dlt));
 
-        readdirSync("./dist/commands").forEach(async (file) => {
+        readdirSync("./build/commands").forEach(async (file) => {
             if (file.endsWith(".js")) {
                 const data: Command = (await import(`../commands/${file}`)).default;
                 this.commands.push(data);
