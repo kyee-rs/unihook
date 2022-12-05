@@ -15,6 +15,8 @@
     "dependencies": {
         "@grammyjs/auto-retry": "^1.1.1",
         "@grammyjs/conversations": "^1.1.0",
+        "@grammyjs/menu": "^1.1.2",
+        "@grammyjs/parse-mode": "^1.5.0",
         "@prisma/client": "4.7.1",
         "body-parser": "^1.20.1",
         "express": "^4.18.2",

@@ -12,11 +12,11 @@ export default {
         const patterns = await database.getPatterns(ctx.from!.id);
         await database.close();
         if (patterns.length === 0) {
-            return await ctx.reply("You have no patterns. Use /add to add a pattern.");
+            return await ctx.reply("🚫 You have *no* patterns. Use /add to add a pattern.");
         }
-        let text = "Your patterns:\n\n";
+        let text = "📡 Your patterns:\n";
         for (const pattern of patterns) {
-            text += `Pattern: ${pattern.pattern}\nWebhook ID: ${pattern.id}\n\n`;
+            text += `*Pattern*: \`${pattern.pattern}\`\n*ID*: \`${pattern.id}\`\n\n`;
         }
         await ctx.reply(text);
     },

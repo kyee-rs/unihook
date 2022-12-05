@@ -1,10 +1,11 @@
 import { autoRetry } from "@grammyjs/auto-retry";
 import { conversations, createConversation } from "@grammyjs/conversations";
+import { hydrateReply, parseMode } from "@grammyjs/parse-mode";
 import { readdirSync } from "fs";
 import { Bot, BotConfig, session } from "grammy";
 import { MyContext } from "../../types/bot";
 import Command from "../commands";
-import { add, dlt } from "./conversations";
+import { add, deleteMenu } from "./conversations";
 
 export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
     public commands: Command[] = [];
@@ -13,6 +14,8 @@ export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
     }
     public prepate() {
         this.api.config.use(autoRetry());
+        this.use(hydrateReply<MyContext>);
+        this.api.config.use(parseMode("Markdown"));
         this.use(
             session({
                 initial() {
@@ -22,8 +25,7 @@ export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
         );
         this.use(conversations());
         this.use(createConversation(add));
-        this.use(createConversation(dlt));
-
+        this.use(deleteMenu);
         readdirSync("./build/commands").forEach(async (file) => {
             if (file.endsWith(".js")) {
                 const data: Command = (await import(`../commands/${file}`)).default;

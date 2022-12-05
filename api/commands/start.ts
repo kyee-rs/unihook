@@ -6,9 +6,9 @@ export default {
     description: "Initialize the bot.",
     in_list: true,
     run: async (ctx: MyContext) => {
-        const inline = new InlineKeyboard().url("Source code", "https://github.com/voxelin/unihook");
+        const inline = new InlineKeyboard().url("Source code 🇺🇦", "https://github.com/voxelin/unihook");
         await ctx.reply(
-            "Welcome! I am Universal Webhook Bot. I can send you messages when a webhook is triggered. To get started, please use /register to add your account to a Database.",
+            "Welcome! I am *Universal Webhook Bot* 🇺🇦.\nI can send you templated messages when a webhook is triggered.\nTo get started, add a webhook handler using /add.",
             { reply_to_message_id: ctx.message?.message_id, reply_markup: inline },
         );
     },

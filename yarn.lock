@@ -44,6 +44,16 @@
     debug "^4.3.4"
     o-son "^1.0.0"
 
+"@grammyjs/menu@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@grammyjs/menu/-/menu-1.1.2.tgz#d4c447e72d16ccc0bb202a19a310720f1720e2da"
+  integrity sha512-OsH9psoatplzMTsouyc8tcOjHMCfWpymmnOBC3YJ9SNi+Akpa52I+YYoiK0/jS7g24DNiR5hyr2U9YgmLeswig==
+
+"@grammyjs/parse-mode@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@grammyjs/parse-mode/-/parse-mode-1.5.0.tgz#7cef50a68e41b45d084dee4a980757b3caae2cb1"
+  integrity sha512-6M1aM1CZh2JxTLuE/M7sUqTvjc3/SQHrlwCZq2kZDlprDYQGBFBiRr3F5SKN4u5MMP1iHYfWMDbcWiDzSPxmaA==
+
 "@grammyjs/types@^2.10.0", "@grammyjs/types@^2.8.2":
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-2.10.2.tgz#c72d9379518aa191ce030e14756954949bef771f"
