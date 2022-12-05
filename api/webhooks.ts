@@ -2,13 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import { json } from "body-parser";
 import { createHash } from "crypto";
 import express from "express";
-// import { webhookCallback } from "grammy";
+import { webhookCallback } from "grammy";
 import { bot } from "./bot";
 const app = express();
 const database = new PrismaClient();
 app.use(json());
 
-// app.post(`/${process.env.BOT_TOKEN}`, webhookCallback(bot, "express"));
+app.post(`/${process.env.BOT_TOKEN}`, webhookCallback(bot, "express"));
 app.post("/:id/:token/:hookid", (req, res) => {
     if (!req.params.id) return res.status(400).send("Missing id");
     if (isNaN(<any>req.params.id)) return res.status(400).send("Invalid token");
@@ -41,7 +41,7 @@ app.post("/:id/:token/:hookid", (req, res) => {
                                 const keys = key.split(".");
                                 let value = data;
                                 for (const key of keys) {
-                                    value = value[key] || "";
+                                    value = value[key] ?? "";
                                 }
                                 message = message.replace(match, value);
                             } else if (key.includes("[")) {
@@ -50,9 +50,9 @@ app.post("/:id/:token/:hookid", (req, res) => {
                                 for (const key of keys) {
                                     value = value[key.replace("]", "")];
                                 }
-                                message = message.replace(match, value || "");
+                                message = message.replace(match, value ?? "");
                             } else {
-                                message = message.replace(match, data[key] || "<undefined>");
+                                message = message.replace(match, data[key] ?? "<undefined>");
                             }
                         }
                     }
@@ -69,5 +69,5 @@ app.post("/:id/:token/:hookid", (req, res) => {
             });
     });
 });
-bot.start();
+
 app.listen(3000);

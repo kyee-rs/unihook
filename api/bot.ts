@@ -12,7 +12,7 @@ async function add(conversation: MyConversation, ctx: MyContext) {
     }
 
     await ctx.reply(
-        "Please send me the pattern you want to add. Use /cancel to cancel.\n\nExample: `New alert from Webhook {data.webhook_name}`",
+        "Please send me the pattern you want to add. Use /cancel to cancel.\n\nExample: `New alert from Webhook {webhook_name}`, where `{webhook_name}` is the parsed value from payload. Markdown is supported.",
         { parse_mode: "Markdown" },
     );
     const pattern = await conversation.waitFor(":text");
