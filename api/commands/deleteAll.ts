@@ -1,8 +1,8 @@
 import { MyContext } from "../../types/bot";
 import { database } from "../server";
 export default {
-    command: "",
-    description: "",
+    command: "deleteAll",
+    description: "Delete all your webhook patterns.",
     in_list: true,
     run: async (ctx: MyContext) => {
         if (!(await database.getUser(ctx.from!.id))) {
