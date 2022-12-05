@@ -3,7 +3,6 @@ import { conversations, createConversation } from "@grammyjs/conversations";
 import { readdirSync } from "fs";
 import { Bot, BotConfig, session } from "grammy";
 import { MyContext } from "../../types/bot";
-import { bot } from "../bot";
 import Command from "../commands";
 import { add, dlt } from "./conversations";
 
@@ -21,9 +20,9 @@ export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
                 },
             }),
         );
-        bot.use(conversations());
-        bot.use(createConversation(add));
-        bot.use(createConversation(dlt));
+        this.use(conversations());
+        this.use(createConversation(add));
+        this.use(createConversation(dlt));
 
         readdirSync("./dist/commands").forEach(async (file) => {
             if (file.endsWith(".js")) {
@@ -36,7 +35,7 @@ export class CustomClient<C extends MyContext = MyContext> extends Bot<C> {
         if (!command) throw new Error("Command is undefined");
         if (command.startsWith("/")) command = command.slice(1);
         if (command.includes("@")) {
-            if (command.split("@")[1] !== bot.botInfo.username) return;
+            if (command.split("@")[1] !== this.botInfo.username) return;
             command = command.split("@")[0];
         }
         if (this.commands.filter((cmd) => cmd.command === command).length > 0) {
