@@ -1,4 +1,5 @@
 import { json } from "body-parser";
+import compression from "compression";
 import express from "express";
 import { webhookCallback } from "grammy";
 import { bot } from "./bot";
@@ -9,6 +10,7 @@ export const database = new Database();
 database.init();
 
 app.use(json());
+app.use(compression());
 
 app.post(`/${process.env.BOT_TOKEN}`, webhookCallback(bot, "express"));
 app.post("/:id/:token/:hookid", handle);
