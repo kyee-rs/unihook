@@ -4,6 +4,15 @@ import { deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';
 export const commands = new Composer<MyContext>();
 
+commands.use(async (ctx, next) => {
+    if (!ctx.from) {
+        return ctx.reply(
+            'Bot couldn\'t detect your account information. Please, try again later.',
+        );
+    }
+    await next();
+});
+
 commands.command('add', async (ctx) => {
     await ctx.conversation.enter('add');
 });
@@ -17,7 +26,7 @@ commands.command('exit', async (ctx) => {
 });
 
 commands.command('delete', async (ctx) => {
-    if ((await database.getPatterns(ctx.from!.id)).length === 0) {
+    if ((await database.getPatterns(ctx.from?.id ?? NaN)).length === 0) {
         return await ctx.reply(
             '🚫 You have *no* patterns. Use /add to add a pattern.',
         );
@@ -27,16 +36,16 @@ commands.command('delete', async (ctx) => {
     });
 });
 
-commands.command('deleteAll', async (ctx) => {
-    if (!(await database.getUser(ctx.from!.id))) {
-        await database.createUser(ctx.from!.id);
+commands.command('delete_all', async (ctx) => {
+    if (!(await database.getUser(ctx.from?.id ?? NaN))) {
+        await database.createUser(ctx.from?.id ?? NaN);
     }
     await ctx.reply(
         `☑️ Successfully deleted ${
-            (await database.getPatterns(ctx.from!.id)).length
+            (await database.getPatterns(ctx.from?.id ?? NaN)).length
         } patterns.`,
     );
-    await database.deleteAllPatterns(ctx.from!.id);
+    await database.deleteAllPatterns(ctx.from?.id ?? NaN);
     await database.close();
 });
 

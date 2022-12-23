@@ -7,7 +7,7 @@ import { bot } from '../core/bot.ts';
 import { database } from '../edge.ts';
 export const handle = async (
     ctx: RouterContext<
-        '/hook/:id/:token/:webhook_id',
+        '/:id/:token/:webhook_id',
         {
             id: string;
         } & {
