@@ -6,8 +6,8 @@ UniHook is a simple webhook handler for Telegram. It allows you to create a webh
 
 ## 🚀 Deploy
 
-1. Click [here](https://dash.deno.com/new?url=https://raw.githubusercontent.com/voxelin/unihook/deno/api/edge.ts&env=BOT_TOKEN,DATABASE_URL) to deploy UniHook to Deno Deploy.
-2. Enter the bot token and database URL in the environment variables.
+1. Click [here](https://dash.deno.com/new?url=https://raw.githubusercontent.com/voxelin/unihook/master/api/edge.ts&env=BOT_TOKEN,DATABASE_URL,WEBHOOK_SECRET) to deploy UniHook to Deno Deploy.
+2. Enter the bot token, database URL and webhook secret in the environment variables.
 3. Click "Deploy".
 4. Open `https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={DEPLOY_URL}/bot/{BOT_TOKEN}` to set the webhook. Replace `{BOT_TOKEN}` with your bot token and `{DEPLOY_URL}` with the URL of your deploy.
 5. You're done! You can now use UniHook.
