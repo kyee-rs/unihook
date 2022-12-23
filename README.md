@@ -1,8 +1,14 @@
 # 📡 UniHook - A simple webhook handler for Telegram. [@uniwebhookbot](https://t.me/uniwebhookbot)
 
+> ⚠ WARNING: See [Deno branch](https://github.com/voxelin/unihook/tree/deno/)
+> for free hosting on Deno Deploy.
+
 ## What is UniHook?
 
-UniHook is a simple webhook handler for Telegram. It allows you to parse webhook payload, and then have the bot forward templated message with payload to you. This is useful for things like logging, using with services like IFTTT or GitGuardian.
+UniHook is a simple webhook handler for Telegram. It allows you to parse webhook
+payload, and then have the bot forward templated message with payload to you.
+This is useful for things like logging, using with services like IFTTT or
+GitGuardian.
 
 ## How to use
 
