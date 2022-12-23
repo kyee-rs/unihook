@@ -1,6 +1,9 @@
-import type { Context, SessionFlavor } from 'grammy';
-import type { Conversation, ConversationFlavor } from 'grammy/convs';
-import { ParseModeFlavor } from 'grammy/pm';
+import type { Context, SessionFlavor } from '../../dependencies.deno.ts';
+import type {
+    Conversation,
+    ConversationFlavor,
+} from '../../dependencies.deno.ts';
+import { ParseModeFlavor } from '../../dependencies.deno.ts';
 
 export type MyContext =
     & Context

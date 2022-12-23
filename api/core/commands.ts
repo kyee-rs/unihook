@@ -4,7 +4,7 @@ import { deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';
 export const commands = new Composer<MyContext>();
 
-commands.use(async (ctx, next) => { 
+commands.use(async (ctx, next) => {
     if (!ctx.from) {
         return ctx.reply('🚫 You are not authorized to use this bot.');
     }
@@ -12,7 +12,7 @@ commands.use(async (ctx, next) => {
         await database.createUser(ctx.from.id);
     }
     await next();
-})
+});
 
 commands.command('add', async (ctx) => {
     await ctx.conversation.enter('add');

@@ -6,5 +6,5 @@ const runner = run(bot, 300, {});
 console.log(`🦄 Initialized as @${bot.botInfo.username}`);
 
 const stopRunner = () => runner.isRunning() && runner.stop();
-Deno.addSignalListener("SIGINT", stopRunner);
-Deno.addSignalListener("SIGTERM", stopRunner);
+Deno.addSignalListener('SIGINT', stopRunner);
+Deno.addSignalListener('SIGTERM', stopRunner);
