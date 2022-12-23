@@ -1,3 +1,4 @@
-import './polyfill.js';
+
+import './polyfill.js'
 // @deno-types="./index.d.ts"
-export * from './edge.js';
+export * from './edge.js'

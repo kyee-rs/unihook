@@ -1,2 +1,1 @@
-globalThis.process = { env: Deno.env.toObject() };
-globalThis.global = globalThis;
+globalThis.process = { env: Deno.env.toObject() }; globalThis.global = globalThis

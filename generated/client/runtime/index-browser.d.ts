@@ -144,17 +144,17 @@ export declare class Decimal {
 
     round(): Decimal;
 
-    sine(): Decimal;
-    sin(): Decimal;
+    sine() : Decimal;
+    sin() : Decimal;
 
     squareRoot(): Decimal;
     sqrt(): Decimal;
 
-    tangent(): Decimal;
-    tan(): Decimal;
+    tangent() : Decimal;
+    tan() : Decimal;
 
     times(n: Decimal.Value): Decimal;
-    mul(n: Decimal.Value): Decimal;
+    mul(n: Decimal.Value) : Decimal;
 
     toBinary(significantDigits?: number): string;
     toBinary(significantDigits: number, rounding: Decimal.Rounding): string;
@@ -173,10 +173,7 @@ export declare class Decimal {
     toFraction(max_denominator?: Decimal.Value): Decimal[];
 
     toHexadecimal(significantDigits?: number): string;
-    toHexadecimal(
-        significantDigits: number,
-        rounding: Decimal.Rounding,
-    ): string;
+    toHexadecimal(significantDigits: number, rounding: Decimal.Rounding): string;
     toHex(significantDigits?: number): string;
     toHex(significantDigits: number, rounding?: Decimal.Rounding): string;
 
@@ -196,10 +193,7 @@ export declare class Decimal {
     toPrecision(significantDigits: number, rounding: Decimal.Rounding): string;
 
     toSignificantDigits(significantDigits?: number): Decimal;
-    toSignificantDigits(
-        significantDigits: number,
-        rounding: Decimal.Rounding,
-    ): Decimal;
+    toSignificantDigits(significantDigits: number, rounding: Decimal.Rounding): Decimal;
     toSD(significantDigits?: number): Decimal;
     toSD(significantDigits: number, rounding: Decimal.Rounding): Decimal;
 
@@ -221,11 +215,7 @@ export declare class Decimal {
     static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
     static cbrt(n: Decimal.Value): Decimal;
     static ceil(n: Decimal.Value): Decimal;
-    static clamp(
-        n: Decimal.Value,
-        min: Decimal.Value,
-        max: Decimal.Value,
-    ): Decimal;
+    static clamp(n: Decimal.Value, min: Decimal.Value, max: Decimal.Value): Decimal;
     static clone(object?: Decimal.Config): Decimal.Constructor;
     static config(object: Decimal.Config): Decimal.Constructor;
     static cos(n: Decimal.Value): Decimal;
@@ -243,7 +233,7 @@ export declare class Decimal {
     static min(...n: Decimal.Value[]): Decimal;
     static mod(x: Decimal.Value, y: Decimal.Value): Decimal;
     static mul(x: Decimal.Value, y: Decimal.Value): Decimal;
-    static noConflict(): Decimal.Constructor; // Browser only
+    static noConflict(): Decimal.Constructor;   // Browser only
     static pow(base: Decimal.Value, exponent: Decimal.Value): Decimal;
     static random(significantDigits?: number): Decimal;
     static round(n: Decimal.Value): Decimal;
@@ -301,9 +291,7 @@ declare class JsonNull extends NullTypesEnumValue {
  * @param definition
  * @returns
  */
-export declare function makeStrictEnum<
-    T extends Record<PropertyKey, string | number>,
->(definition: T): T;
+export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
 declare class NullTypesEnumValue extends ObjectEnumValue {
     _getNamespace(): string;
@@ -332,4 +320,4 @@ export declare const objectEnumValues: {
     };
 };
 
-export {};
+export { }

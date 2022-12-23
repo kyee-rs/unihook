@@ -2,16 +2,9 @@
  * TODO
  * @param this
  */
-declare function $extends(
-    this: Client,
-    extension: Args_2 | ((client: Client) => Client),
-): Client;
+declare function $extends(this: Client, extension: Args_2 | ((client: Client) => Client)): Client;
 
-declare type Action =
-    | keyof typeof DMMF.ModelAction
-    | 'executeRaw'
-    | 'queryRaw'
-    | 'runCommandRaw';
+declare type Action = keyof typeof DMMF.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
 declare class AnyNull extends NullTypesEnumValue {
 }
@@ -32,9 +25,7 @@ declare class Arg {
     schemaArg?: DMMF.SchemaArg;
     isNullable: boolean;
     inputType?: DMMF.SchemaArgInputType;
-    constructor(
-        { key, value, isEnum, error, schemaArg, inputType }: ArgOptions,
-    );
+    constructor({ key, value, isEnum, error, schemaArg, inputType }: ArgOptions);
     get [Symbol.toStringTag](): string;
     _toString(value: ArgValue, key: string): string | undefined;
     toString(): string | undefined;
@@ -67,17 +58,7 @@ declare class Args {
 
 declare type Args_2 = OptionalFlat<RequiredArgs>;
 
-declare type ArgValue =
-    | string
-    | boolean
-    | number
-    | undefined
-    | Args
-    | string[]
-    | boolean[]
-    | number[]
-    | Args[]
-    | null;
+declare type ArgValue = string | boolean | number | undefined | Args | string[] | boolean[] | number[] | Args[] | null;
 
 declare interface AtLeastOneError {
     type: 'atLeastOne';
@@ -95,8 +76,7 @@ declare interface AtMostOneError {
 
 export declare type BaseDMMF = Pick<DMMF.Document, 'datamodel' | 'mappings'>;
 
-declare interface BaseDMMFHelper
-    extends DMMFDatamodelHelper, DMMFMappingsHelper {
+declare interface BaseDMMFHelper extends DMMFDatamodelHelper, DMMFMappingsHelper {
 }
 
 declare class BaseDMMFHelper {
@@ -109,10 +89,7 @@ declare type BatchTransactionOptions = {
     isolationLevel?: Transaction.IsolationLevel;
 };
 
-declare type BatchTransactionOptions_2 = Omit<
-    PrismaPromiseBatchTransaction,
-    'kind'
->;
+declare type BatchTransactionOptions_2 = Omit<PrismaPromiseBatchTransaction, 'kind'>;
 
 declare interface BinaryTargetsEnvValue {
     fromEnvVar: null | string;
@@ -123,28 +100,24 @@ declare interface CallSite {
     getLocation(): LocationInFile | null;
 }
 
-declare type Client = ReturnType<typeof getPrismaClient> extends
-    new () => infer T ? T : never;
+declare type Client = ReturnType<typeof getPrismaClient> extends new () => infer T ? T : never;
 
 declare type ClientArgs = {
     client: ClientExtensionDefinition;
 };
 
 declare enum ClientEngineType {
-    Library = 'library',
-    Binary = 'binary',
+    Library = "library",
+    Binary = "binary"
 }
 
 declare type ClientExtensionDefinition = {
     [MethodName in string]: (...args: any[]) => any;
 };
 
-declare type Compute<T> = T extends Function ? T
-    : 
-        & {
-            [K in keyof T]: T[K];
-        }
-        & unknown;
+declare type Compute<T> = T extends Function ? T : {
+    [K in keyof T]: T[K];
+} & unknown;
 
 declare type ComputedField = {
     name: string;
@@ -156,23 +129,9 @@ declare type ComputedFieldsMap = {
     [fieldName: string]: ComputedField;
 };
 
-declare type ConnectorType =
-    | 'mysql'
-    | 'mongodb'
-    | 'sqlite'
-    | 'postgresql'
-    | 'sqlserver'
-    | 'jdbc:sqlserver'
-    | 'cockroachdb';
+declare type ConnectorType = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
-declare type ConnectorType_2 =
-    | 'mysql'
-    | 'mongodb'
-    | 'sqlite'
-    | 'postgresql'
-    | 'sqlserver'
-    | 'jdbc:sqlserver'
-    | 'cockroachdb';
+declare type ConnectorType_2 = 'mysql' | 'mongodb' | 'sqlite' | 'postgresql' | 'sqlserver' | 'jdbc:sqlserver' | 'cockroachdb';
 
 declare interface Context {
     /**
@@ -401,17 +360,17 @@ export declare class Decimal {
 
     round(): Decimal;
 
-    sine(): Decimal;
-    sin(): Decimal;
+    sine() : Decimal;
+    sin() : Decimal;
 
     squareRoot(): Decimal;
     sqrt(): Decimal;
 
-    tangent(): Decimal;
-    tan(): Decimal;
+    tangent() : Decimal;
+    tan() : Decimal;
 
     times(n: Decimal.Value): Decimal;
-    mul(n: Decimal.Value): Decimal;
+    mul(n: Decimal.Value) : Decimal;
 
     toBinary(significantDigits?: number): string;
     toBinary(significantDigits: number, rounding: Decimal.Rounding): string;
@@ -430,10 +389,7 @@ export declare class Decimal {
     toFraction(max_denominator?: Decimal.Value): Decimal[];
 
     toHexadecimal(significantDigits?: number): string;
-    toHexadecimal(
-        significantDigits: number,
-        rounding: Decimal.Rounding,
-    ): string;
+    toHexadecimal(significantDigits: number, rounding: Decimal.Rounding): string;
     toHex(significantDigits?: number): string;
     toHex(significantDigits: number, rounding?: Decimal.Rounding): string;
 
@@ -453,10 +409,7 @@ export declare class Decimal {
     toPrecision(significantDigits: number, rounding: Decimal.Rounding): string;
 
     toSignificantDigits(significantDigits?: number): Decimal;
-    toSignificantDigits(
-        significantDigits: number,
-        rounding: Decimal.Rounding,
-    ): Decimal;
+    toSignificantDigits(significantDigits: number, rounding: Decimal.Rounding): Decimal;
     toSD(significantDigits?: number): Decimal;
     toSD(significantDigits: number, rounding: Decimal.Rounding): Decimal;
 
@@ -478,11 +431,7 @@ export declare class Decimal {
     static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
     static cbrt(n: Decimal.Value): Decimal;
     static ceil(n: Decimal.Value): Decimal;
-    static clamp(
-        n: Decimal.Value,
-        min: Decimal.Value,
-        max: Decimal.Value,
-    ): Decimal;
+    static clamp(n: Decimal.Value, min: Decimal.Value, max: Decimal.Value): Decimal;
     static clone(object?: Decimal.Config): Decimal.Constructor;
     static config(object: Decimal.Config): Decimal.Constructor;
     static cos(n: Decimal.Value): Decimal;
@@ -500,7 +449,7 @@ export declare class Decimal {
     static min(...n: Decimal.Value[]): Decimal;
     static mod(x: Decimal.Value, y: Decimal.Value): Decimal;
     static mul(x: Decimal.Value, y: Decimal.Value): Decimal;
-    static noConflict(): Decimal.Constructor; // Browser only
+    static noConflict(): Decimal.Constructor;   // Browser only
     static pow(base: Decimal.Value, exponent: Decimal.Value): Decimal;
     static random(significantDigits?: number): Decimal;
     static round(n: Decimal.Value): Decimal;
@@ -559,9 +508,7 @@ declare type DefaultArgs = {
     client: {};
 };
 
-declare function defineExtension(
-    ext: Args_2 | ((client: Client) => Client),
-): (client: Client) => Client;
+declare function defineExtension(ext: Args_2 | ((client: Client) => Client)): (client: Client) => Client;
 
 declare type Dictionary<T> = {
     [key: string]: T;
@@ -627,12 +574,7 @@ export declare namespace DMMF {
     }
     export type FieldKind = 'scalar' | 'object' | 'enum' | 'unsupported';
     export type FieldNamespace = 'model' | 'prisma';
-    export type FieldLocation =
-        | 'scalar'
-        | 'inputObjectTypes'
-        | 'outputObjectTypes'
-        | 'enumTypes'
-        | 'fieldRefTypes';
+    export type FieldLocation = 'scalar' | 'inputObjectTypes' | 'outputObjectTypes' | 'enumTypes' | 'fieldRefTypes';
     export interface Field {
         kind: FieldKind;
         name: string;
@@ -736,10 +678,7 @@ export declare namespace DMMF {
         location: 'enumTypes';
         type: SchemaEnum | string;
     };
-    export type OutputTypeRef =
-        | TypeRefScalar
-        | TypeRefOutputObject
-        | TypeRefEnum;
+    export type OutputTypeRef = TypeRefScalar | TypeRefOutputObject | TypeRefEnum;
     export interface Deprecation {
         sinceVersion: string;
         reason: string;
@@ -786,23 +725,23 @@ export declare namespace DMMF {
         aggregateRaw?: string | null;
     }
     export enum ModelAction {
-        findUnique = 'findUnique',
-        findUniqueOrThrow = 'findUniqueOrThrow',
-        findFirst = 'findFirst',
-        findFirstOrThrow = 'findFirstOrThrow',
-        findMany = 'findMany',
-        create = 'create',
-        createMany = 'createMany',
-        update = 'update',
-        updateMany = 'updateMany',
-        upsert = 'upsert',
-        delete = 'delete',
-        deleteMany = 'deleteMany',
-        groupBy = 'groupBy',
-        count = 'count',
-        aggregate = 'aggregate',
-        findRaw = 'findRaw',
-        aggregateRaw = 'aggregateRaw',
+        findUnique = "findUnique",
+        findUniqueOrThrow = "findUniqueOrThrow",
+        findFirst = "findFirst",
+        findFirstOrThrow = "findFirstOrThrow",
+        findMany = "findMany",
+        create = "create",
+        createMany = "createMany",
+        update = "update",
+        updateMany = "updateMany",
+        upsert = "upsert",
+        delete = "delete",
+        deleteMany = "deleteMany",
+        groupBy = "groupBy",
+        count = "count",
+        aggregate = "aggregate",
+        findRaw = "findRaw",
+        aggregateRaw = "aggregateRaw"
     }
 }
 
@@ -851,9 +790,7 @@ declare class DMMFSchemaHelper implements Pick<DMMF.Document, 'schema'> {
     rootFieldMap: Dictionary_2<DMMF.SchemaField>;
     constructor({ schema }: Pick<DMMF.Document, 'schema'>);
     get [Symbol.toStringTag](): string;
-    outputTypeToMergedOutputType: (
-        outputType: DMMF.OutputType,
-    ) => DMMF.OutputType;
+    outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
     resolveOutputTypes(): void;
     resolveInputTypes(): void;
     resolveFieldArgumentTypes(): void;
@@ -864,10 +801,7 @@ declare class DMMFSchemaHelper implements Pick<DMMF.Document, 'schema'> {
         prisma: DMMF.OutputType[];
     };
     getEnumMap(): Dictionary_2<DMMF.SchemaEnum>;
-    hasEnumInNamespace(
-        enumName: string,
-        namespace: 'prisma' | 'model',
-    ): boolean;
+    hasEnumInNamespace(enumName: string, namespace: 'prisma' | 'model'): boolean;
     getMergedOutputTypeMap(): Dictionary_2<DMMF.OutputType>;
     getInputTypeMap(): Dictionary_2<DMMF.InputType>;
     getRootFieldMap(): Dictionary_2<DMMF.SchemaField>;
@@ -879,23 +813,9 @@ declare class Document_2 {
     constructor(type: 'query' | 'mutation', children: Field[]);
     get [Symbol.toStringTag](): string;
     toString(): string;
-    validate(
-        select?: any,
-        isTopLevelQuery?: boolean,
-        originalMethod?: string,
-        errorFormat?: 'pretty' | 'minimal' | 'colorless',
-        validationCallsite?: any,
-    ): void;
-    protected printFieldError: (
-        { error }: FieldError,
-        missingItems: MissingItem[],
-        minimal: boolean,
-    ) => string | undefined;
-    protected printArgError: (
-        { error, path, id }: ArgError,
-        hasMissingItems: boolean,
-        minimal: boolean,
-    ) => string | undefined;
+    validate(select?: any, isTopLevelQuery?: boolean, originalMethod?: string, errorFormat?: 'pretty' | 'minimal' | 'colorless', validationCallsite?: any): void;
+    protected printFieldError: ({ error }: FieldError, missingItems: MissingItem[], minimal: boolean) => string | undefined;
+    protected printArgError: ({ error, path, id }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
     /**
      * As we're allowing both single objects and array of objects for list inputs, we need to remove incorrect
      * zero indexes from the path
@@ -938,27 +858,11 @@ export declare abstract class Engine {
     abstract getConfig(): Promise<GetConfigResult>;
     abstract getDmmf(): Promise<DMMF.Document>;
     abstract version(forceRun?: boolean): Promise<string> | string;
-    abstract request<T>(
-        options: RequestOptions<unknown>,
-    ): Promise<QueryEngineResult<T>>;
-    abstract requestBatch<T>(
-        options: RequestBatchOptions,
-    ): Promise<BatchQueryEngineResult<T>[]>;
-    abstract transaction(
-        action: 'start',
-        headers: Transaction.TransactionHeaders,
-        options?: Transaction.Options,
-    ): Promise<Transaction.Info<unknown>>;
-    abstract transaction(
-        action: 'commit',
-        headers: Transaction.TransactionHeaders,
-        info: Transaction.Info<unknown>,
-    ): Promise<void>;
-    abstract transaction(
-        action: 'rollback',
-        headers: Transaction.TransactionHeaders,
-        info: Transaction.Info<unknown>,
-    ): Promise<void>;
+    abstract request<T>(options: RequestOptions<unknown>): Promise<QueryEngineResult<T>>;
+    abstract requestBatch<T>(options: RequestBatchOptions): Promise<BatchQueryEngineResult<T>[]>;
+    abstract transaction(action: 'start', headers: Transaction.TransactionHeaders, options?: Transaction.Options): Promise<Transaction.Info<unknown>>;
+    abstract transaction(action: 'commit', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;
+    abstract transaction(action: 'rollback', headers: Transaction.TransactionHeaders, info: Transaction.Info<unknown>): Promise<void>;
     abstract metrics(options: MetricsOptionsJson): Promise<Metrics>;
     abstract metrics(options: MetricsOptionsPrometheus): Promise<string>;
 }
@@ -1008,20 +912,12 @@ declare interface EngineConfig {
     tracingConfig: TracingConfig;
 }
 
-declare type EngineEventType =
-    | 'query'
-    | 'info'
-    | 'warn'
-    | 'error'
-    | 'beforeExit';
+declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 
-declare type EngineMiddleware<T = unknown> = (
-    params: EngineMiddlewareParams,
-    next: (params: EngineMiddlewareParams) => Promise<{
-        data: T;
-        elapsed: number;
-    }>,
-) => Promise<{
+declare type EngineMiddleware<T = unknown> = (params: EngineMiddlewareParams, next: (params: EngineMiddlewareParams) => Promise<{
+    data: T;
+    elapsed: number;
+}>) => Promise<{
     data: T;
     elapsed: number;
 }>;
@@ -1053,20 +949,23 @@ declare interface EventEmitter {
 }
 
 declare namespace Extensions {
-    export { defineExtension, getExtensionContext };
+    export {
+        defineExtension,
+        getExtensionContext
+    }
 }
-export { Extensions };
+export { Extensions }
 
 declare namespace Extensions_2 {
     export {
         DefaultArgs,
-        GetClient,
-        GetModel,
         GetResultPayload,
         GetResultSelect,
+        GetModel,
+        GetClient,
         ReadonlySelector,
-        RequiredArgs as Args,
-    };
+        RequiredArgs as Args
+    }
 }
 
 declare class Field {
@@ -1121,16 +1020,7 @@ export declare interface FieldRef<Model, FieldType> {
  * @param seen to add to already seen
  * @returns found paths (symlinks preserved)
  */
-export declare function findSync(
-    root: string,
-    match: (RegExp | string)[],
-    types?: ('f' | 'd' | 'l')[],
-    deep?: ('d' | 'l')[],
-    limit?: number,
-    handler?: Handler,
-    found?: string[],
-    seen?: Record<string, true>,
-): string[];
+export declare function findSync(root: string, match: (RegExp | string)[], types?: ('f' | 'd' | 'l')[], deep?: ('d' | 'l')[], limit?: number, handler?: Handler, found?: string[], seen?: Record<string, true>): string[];
 
 declare interface GeneratorConfig {
     name: string;
@@ -1142,11 +1032,7 @@ declare interface GeneratorConfig {
     previewFeatures: string[];
 }
 
-declare type GetClient<
-    Base extends object,
-    C extends RequiredArgs['client'],
-    CP extends RequiredArgs['client'],
-> = C & Omit_2<CP, keyof C> & Omit_2<Base, '$use' | keyof C | keyof CP>;
+declare type GetClient<Base extends object, C extends RequiredArgs['client'], CP extends RequiredArgs['client']> = C & Omit_2<CP, keyof C> & Omit_2<Base, '$use' | keyof C | keyof CP>;
 
 declare type GetConfigResult = {
     datasources: DataSource[];
@@ -1157,10 +1043,7 @@ declare function getExtensionContext<T>(that: {
     [K: symbol]: T;
 }): T;
 
-declare type GetModel<
-    Base extends object,
-    M extends RequiredArgs['model'][string],
-> = M & Omit_2<Base, keyof M>;
+declare type GetModel<Base extends object, M extends RequiredArgs['model'][string]> = M & Omit_2<Base, keyof M>;
 
 export declare function getPrismaClient(config: GetPrismaClientConfig): {
     new (optionsArg?: PrismaClientOptions): {
@@ -1177,12 +1060,10 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
         _tracingConfig: TracingConfig;
         _hooks?: Hooks | undefined;
         _metrics: MetricsClient;
-        _getConfigPromise?:
-            | Promise<{
-                datasources: DataSource[];
-                generators: GeneratorConfig[];
-            }>
-            | undefined;
+        _getConfigPromise?: Promise<{
+            datasources: DataSource[];
+            generators: GeneratorConfig[];
+        }> | undefined;
         _middlewares: Middlewares;
         _previewFeatures: string[];
         _activeProvider: string;
@@ -1219,12 +1100,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
         /**
          * Executes a raw query and always returns a number
          */
-        $executeRawInternal(
-            transaction: PrismaPromiseTransaction | undefined,
-            lock: PromiseLike<void> | undefined,
-            query: string | TemplateStringsArray | Sql,
-            ...values: RawValue[]
-        ): Promise<any>;
+        $executeRawInternal(transaction: PrismaPromiseTransaction | undefined, lock: PromiseLike<void> | undefined, query: string | TemplateStringsArray | Sql, ...values: RawValue[]): Promise<any>;
         /**
          * Executes a raw query provided through a safe tag function
          * @see https://github.com/prisma/prisma/issues/7142
@@ -1233,10 +1109,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $executeRaw(
-            query: TemplateStringsArray | Sql,
-            ...values: any[]
-        ): PrismaPromise<unknown>;
+        $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise<unknown>;
         /**
          * Unsafe counterpart of `$executeRaw` that is susceptible to SQL injections
          * @see https://github.com/prisma/prisma/issues/7142
@@ -1245,10 +1118,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $executeRawUnsafe(
-            query: string,
-            ...values: RawValue[]
-        ): PrismaPromise<unknown>;
+        $executeRawUnsafe(query: string, ...values: RawValue[]): PrismaPromise<unknown>;
         /**
          * Executes a raw command only for MongoDB
          *
@@ -1259,12 +1129,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
         /**
          * Executes a raw query and returns selected data
          */
-        $queryRawInternal(
-            transaction: PrismaPromiseTransaction | undefined,
-            lock: PromiseLike<void> | undefined,
-            query: string | TemplateStringsArray | Sql,
-            ...values: RawValue[]
-        ): Promise<unknown[]>;
+        $queryRawInternal(transaction: PrismaPromiseTransaction | undefined, lock: PromiseLike<void> | undefined, query: string | TemplateStringsArray | Sql, ...values: RawValue[]): Promise<unknown[]>;
         /**
          * Executes a raw query provided through a safe tag function
          * @see https://github.com/prisma/prisma/issues/7142
@@ -1273,10 +1138,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $queryRaw(
-            query: TemplateStringsArray | Sql,
-            ...values: any[]
-        ): PrismaPromise<unknown>;
+        $queryRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise<unknown>;
         /**
          * Unsafe counterpart of `$queryRaw` that is susceptible to SQL injections
          * @see https://github.com/prisma/prisma/issues/7142
@@ -1285,17 +1147,14 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $queryRawUnsafe(
-            query: string,
-            ...values: RawValue[]
-        ): PrismaPromise<unknown>;
+        $queryRawUnsafe(query: string, ...values: RawValue[]): PrismaPromise<unknown>;
         __internal_triggerPanic(fatal: boolean): Promise<any>;
         /**
          * Execute a batch of requests in a transaction
          * @param requests
          * @param options
          */
-        _transactionWithArray({ promises, options }: {
+        _transactionWithArray({ promises, options, }: {
             promises: Array<PrismaPromise<any>>;
             options?: BatchTransactionOptions | undefined;
         }): Promise<any>;
@@ -1305,7 +1164,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param options
          * @returns
          */
-        _transactionWithCallback({ callback, options }: {
+        _transactionWithCallback({ callback, options, }: {
             callback: (client: Client) => Promise<unknown>;
             options?: Options | undefined;
         }): Promise<unknown>;
@@ -1322,26 +1181,8 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @returns
          */
         _request(internalParams: InternalRequestParams): Promise<any>;
-        _executeRequest(
-            {
-                args,
-                clientMethod,
-                jsModelName,
-                dataPath,
-                callsite,
-                action,
-                model,
-                headers,
-                argsMapper,
-                transaction,
-                lock,
-                unpacker,
-                otelParentCtx,
-            }: InternalRequestParams,
-        ): Promise<object>;
-        _getDmmf: (
-            params: Pick<InternalRequestParams, 'callsite' | 'clientMethod'>,
-        ) => Promise<DMMFClass>;
+        _executeRequest({ args, clientMethod, jsModelName, dataPath, callsite, action, model, headers, argsMapper, transaction, lock, unpacker, otelParentCtx, }: InternalRequestParams): Promise<object>;
+        _getDmmf: (params: Pick<InternalRequestParams, "callsite" | "clientMethod">) => Promise<DMMFClass>;
         readonly $metrics: MetricsClient;
         /**
          * Shortcut for checking a preview flag
@@ -1406,27 +1247,15 @@ declare interface GetPrismaClientConfig {
     inlineSchemaHash?: string;
 }
 
-declare type GetResultPayload<
-    Base extends object,
-    R extends RequiredArgs['result'][string],
-> = {} extends R ? Base
-    : 
-        & {
-            [K in keyof R]: ReturnType<R[K]['compute']>;
-        }
-        & {
-            [K in Exclude<keyof Base, keyof R>]: Base[K];
-        };
+declare type GetResultPayload<Base extends object, R extends RequiredArgs['result'][string]> = {} extends R ? Base : {
+    [K in keyof R]: ReturnType<R[K]['compute']>;
+} & {
+    [K in Exclude<keyof Base, keyof R>]: Base[K];
+};
 
-declare type GetResultSelect<
-    Base extends object,
-    R extends RequiredArgs['result'][string],
-> = R extends unknown ? 
-        & Base
-        & {
-            [K in keyof R]?: boolean;
-        }
-    : never;
+declare type GetResultSelect<Base extends object, R extends RequiredArgs['result'][string]> = R extends unknown ? Base & {
+    [K in keyof R]?: boolean;
+} : never;
 
 declare type HandleErrorParams = {
     error: any;
@@ -1435,11 +1264,7 @@ declare type HandleErrorParams = {
     transaction?: PrismaPromiseTransaction;
 };
 
-declare type Handler = (
-    base: string,
-    item: string,
-    type: ItemType,
-) => boolean | string;
+declare type Handler = (base: string, item: string, type: ItemType) => boolean | string;
 
 declare type HookParams = {
     query: string;
@@ -1488,17 +1313,11 @@ declare type InlineDatasources = {
     };
 };
 
-declare type InstanceRejectOnNotFound =
-    | RejectOnNotFound
-    | Record<string, RejectOnNotFound>
-    | Record<string, Record<string, RejectOnNotFound>>;
+declare type InstanceRejectOnNotFound = RejectOnNotFound | Record<string, RejectOnNotFound> | Record<string, Record<string, RejectOnNotFound>>;
 
 declare type InteractiveTransactionOptions<Payload> = Transaction.Info<Payload>;
 
-declare type InteractiveTransactionOptions_2 = Omit<
-    PrismaPromiseInteractiveTransaction,
-    'kind'
->;
+declare type InteractiveTransactionOptions_2 = Omit<PrismaPromiseInteractiveTransaction, 'kind'>;
 
 declare interface InternalDatasource {
     name: string;
@@ -1532,13 +1351,7 @@ declare type InternalRequestParams = {
     argsMapper?: (args?: UserArgs) => UserArgs;
 } & Omit<QueryMiddlewareParams, 'runInTransaction'>;
 
-declare type InvalidArgError =
-    | InvalidArgNameError
-    | MissingArgError
-    | InvalidArgTypeError
-    | AtLeastOneError
-    | AtMostOneError
-    | InvalidNullArgError;
+declare type InvalidArgError = InvalidArgNameError | MissingArgError | InvalidArgTypeError | AtLeastOneError | AtMostOneError | InvalidNullArgError;
 
 /**
  * This error occurs if the user provides an arg name that doesn't exist
@@ -1567,13 +1380,7 @@ declare interface InvalidArgTypeError {
     providedValue: any;
 }
 
-declare type InvalidFieldError =
-    | InvalidFieldNameError
-    | InvalidFieldTypeError
-    | EmptySelectError
-    | NoTrueSelectError
-    | IncludeAndSelectError
-    | EmptyIncludeError;
+declare type InvalidFieldError = InvalidFieldNameError | InvalidFieldTypeError | EmptySelectError | NoTrueSelectError | IncludeAndSelectError | EmptyIncludeError;
 
 declare interface InvalidFieldNameError {
     type: 'invalidFieldName';
@@ -1604,11 +1411,11 @@ declare interface InvalidNullArgError {
 }
 
 declare enum IsolationLevel {
-    ReadUncommitted = 'ReadUncommitted',
-    ReadCommitted = 'ReadCommitted',
-    RepeatableRead = 'RepeatableRead',
-    Snapshot = 'Snapshot',
-    Serializable = 'Serializable',
+    ReadUncommitted = "ReadUncommitted",
+    ReadCommitted = "ReadCommitted",
+    RepeatableRead = "RepeatableRead",
+    Snapshot = "Snapshot",
+    Serializable = "Serializable"
 }
 
 declare type ItemType = 'd' | 'f' | 'l';
@@ -1622,12 +1429,7 @@ declare interface Job {
 /**
  * Create a SQL query for a list of values.
  */
-export declare function join(
-    values: RawValue[],
-    separator?: string,
-    prefix?: string,
-    suffix?: string,
-): Sql;
+export declare function join(values: RawValue[], separator?: string, prefix?: string, suffix?: string): Sql;
 
 declare class JsonNull extends NullTypesEnumValue {
 }
@@ -1659,10 +1461,7 @@ declare type LogDefinition = {
 
 declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
 
-export declare function makeDocument(
-    { dmmf, rootTypeName, rootField, select, modelName, extensions }:
-        DocumentInput,
-): Document_2;
+export declare function makeDocument({ dmmf, rootTypeName, rootField, select, modelName, extensions, }: DocumentInput): Document_2;
 
 /**
  * Generates more strict variant of an enum which, unlike regular enum,
@@ -1680,9 +1479,7 @@ export declare function makeDocument(
  * @param definition
  * @returns
  */
-export declare function makeStrictEnum<
-    T extends Record<PropertyKey, string | number>,
->(definition: T): T;
+export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
 /**
  * Class that holds the list of all extensions, applied to particular instance, as well
@@ -1701,9 +1498,7 @@ declare class MergedExtensionsList {
     append(extension: Args_2): MergedExtensionsList;
     getAllComputedFields(dmmfModelName: string): ComputedFieldsMap | undefined;
     getAllClientExtensions(): ClientExtensionDefinition | undefined;
-    getAllModelExtensions(
-        dmmfModelName: string,
-    ): ModelExtensionDefinition | undefined;
+    getAllModelExtensions(dmmfModelName: string): ModelExtensionDefinition | undefined;
     getAllQueryCallbacks(jsModelName: string, action: string): any;
 }
 
@@ -1878,20 +1673,9 @@ declare type Options = {
     isolationLevel?: IsolationLevel;
 };
 
-declare type PatchDeep<O1, O2, O = O1 & O2> =
-    & {
-        [K in keyof O]: K extends keyof O1
-            ? K extends keyof O2
-                ? O1[K] extends object
-                    ? O2[K] extends object ? O1[K] extends Function ? O1[K]
-                        : O2[K] extends Function ? O1[K]
-                        : PatchDeep<O1[K], O2[K]>
-                    : O1[K]
-                : O1[K]
-            : O1[K]
-            : O2[K & keyof O2];
-    }
-    & unknown;
+declare type PatchDeep<O1, O2, O = O1 & O2> = {
+    [K in keyof O]: K extends keyof O1 ? K extends keyof O2 ? O1[K] extends object ? O2[K] extends object ? O1[K] extends Function ? O1[K] : O2[K] extends Function ? O1[K] : PatchDeep<O1[K], O2[K]> : O1[K] : O1[K] : O1[K] : O2[K & keyof O2];
+} & unknown;
 
 declare type PatchFlat<O1, O2> = O1 & Omit_2<O2, keyof O1>;
 
@@ -1899,12 +1683,9 @@ declare type PatchFlat<O1, O2> = O1 & Omit_2<O2, keyof O1>;
  * Patches 3 objects on top of each other with minimal looping.
  * This is a more efficient way of doing `PatchFlat<A, PatchFlat<B, C>>`
  */
-declare type PatchFlat3<A, B, C> =
-    & A
-    & {
-        [K in Exclude<keyof B | keyof C, keyof A>]: K extends keyof B ? B[K]
-            : C[K & keyof C];
-    };
+declare type PatchFlat3<A, B, C> = A & {
+    [K in Exclude<keyof B | keyof C, keyof A>]: K extends keyof B ? B[K] : C[K & keyof C];
+};
 
 declare type Pick_2<T, K extends string | number | symbol> = {
     [P in keyof T as P extends K ? P : never]: T[P];
@@ -1923,16 +1704,12 @@ export declare class PrismaClientInitializationError extends Error {
     get [Symbol.toStringTag](): string;
 }
 
-export declare class PrismaClientKnownRequestError extends Error
-    implements ErrorWithBatchIndex {
+export declare class PrismaClientKnownRequestError extends Error implements ErrorWithBatchIndex {
     code: string;
     meta?: Record<string, unknown>;
     clientVersion: string;
     batchRequestIdx?: number;
-    constructor(
-        message: string,
-        { code, clientVersion, meta, batchRequestIdx }: KnownErrorParams,
-    );
+    constructor(message: string, { code, clientVersion, meta, batchRequestIdx }: KnownErrorParams);
     get [Symbol.toStringTag](): string;
 }
 
@@ -1987,14 +1764,10 @@ export declare class PrismaClientRustPanicError extends Error {
     get [Symbol.toStringTag](): string;
 }
 
-export declare class PrismaClientUnknownRequestError extends Error
-    implements ErrorWithBatchIndex {
+export declare class PrismaClientUnknownRequestError extends Error implements ErrorWithBatchIndex {
     clientVersion: string;
     batchRequestIdx?: number;
-    constructor(
-        message: string,
-        { clientVersion, batchRequestIdx }: UnknownErrorParams,
-    );
+    constructor(message: string, { clientVersion, batchRequestIdx }: UnknownErrorParams);
     get [Symbol.toStringTag](): string;
 }
 
@@ -2014,37 +1787,24 @@ declare interface PrismaPromise<A> extends Promise<A> {
      * @param onrejected same as regular promises
      * @param transaction interactive transaction options
      */
-    then<R1 = A, R2 = never>(
-        onfulfilled?: (value: A) => R1 | PromiseLike<R1>,
-        onrejected?: (error: unknown) => R2 | PromiseLike<R2>,
-        transaction?: InteractiveTransactionOptions_2,
-    ): Promise<R1 | R2>;
+    then<R1 = A, R2 = never>(onfulfilled?: (value: A) => R1 | PromiseLike<R1>, onrejected?: (error: unknown) => R2 | PromiseLike<R2>, transaction?: InteractiveTransactionOptions_2): Promise<R1 | R2>;
     /**
      * Extension of the original `.catch` function
      * @param onrejected same as regular promises
      * @param transaction interactive transaction options
      */
-    catch<R = never>(
-        onrejected?: ((reason: any) => R | PromiseLike<R>) | undefined | null,
-        transaction?: InteractiveTransactionOptions_2,
-    ): Promise<A | R>;
+    catch<R = never>(onrejected?: ((reason: any) => R | PromiseLike<R>) | undefined | null, transaction?: InteractiveTransactionOptions_2): Promise<A | R>;
     /**
      * Extension of the original `.finally` function
      * @param onfinally same as regular promises
      * @param transaction interactive transaction options
      */
-    finally(
-        onfinally?: (() => void) | undefined | null,
-        transaction?: InteractiveTransactionOptions_2,
-    ): Promise<A>;
+    finally(onfinally?: (() => void) | undefined | null, transaction?: InteractiveTransactionOptions_2): Promise<A>;
     /**
      * Called when executing a batch of regular tx
      * @param transaction transaction options for regular tx
      */
-    requestTransaction?(
-        transaction: BatchTransactionOptions_2,
-        lock?: PromiseLike<void>,
-    ): PromiseLike<unknown>;
+    requestTransaction?(transaction: BatchTransactionOptions_2, lock?: PromiseLike<void>): PromiseLike<unknown>;
 }
 
 declare type PrismaPromiseBatchTransaction = {
@@ -2060,9 +1820,7 @@ declare type PrismaPromiseInteractiveTransaction = {
     payload: unknown;
 };
 
-declare type PrismaPromiseTransaction =
-    | PrismaPromiseBatchTransaction
-    | PrismaPromiseInteractiveTransaction;
+declare type PrismaPromiseTransaction = PrismaPromiseBatchTransaction | PrismaPromiseInteractiveTransaction;
 
 declare type QueryEngineRequestHeaders = {
     traceparent?: string;
@@ -2075,10 +1833,7 @@ declare type QueryEngineResult<T> = {
     elapsed: number;
 };
 
-declare type QueryMiddleware<T = unknown> = (
-    params: QueryMiddlewareParams,
-    next: (params: QueryMiddlewareParams) => Promise<T>,
-) => Promise<T>;
+declare type QueryMiddleware<T = unknown> = (params: QueryMiddlewareParams, next: (params: QueryMiddlewareParams) => Promise<T>) => Promise<T>;
 
 declare type QueryMiddlewareParams = {
     /** The model this is executed on */
@@ -2095,11 +1850,9 @@ declare type QueryMiddlewareParams = {
 
 declare type QueryOptions = {
     query: {
-        [ModelName in string]:
-            & {
-                [ModelAction in string]: QueryOptionsCb;
-            }
-            & {};
+        [ModelName in string]: {
+            [ModelAction in string]: QueryOptionsCb;
+        } & {};
     };
 };
 
@@ -2126,16 +1879,11 @@ declare type ReadonlyDeep<T> = {
     readonly [K in keyof T]: ReadonlyDeep<T[K]>;
 };
 
-declare type ReadonlySelector<T> = T extends unknown ? 
-        & {
-            readonly [
-                K in keyof T as K extends 'include' | 'select' ? K : never
-            ]: ReadonlyDeep<T[K]>;
-        }
-        & {
-            [K in keyof T as K extends 'include' | 'select' ? never : K]: T[K];
-        }
-    : never;
+declare type ReadonlySelector<T> = T extends unknown ? {
+    readonly [K in keyof T as K extends 'include' | 'select' ? K : never]: ReadonlyDeep<T[K]>;
+} & {
+    [K in keyof T as K extends 'include' | 'select' ? never : K]: T[K];
+} : never;
 
 declare type RejectOnNotFound = boolean | ((error: Error) => Error) | undefined;
 
@@ -2162,47 +1910,16 @@ declare class RequestHandler {
     dataloader: DataLoader<Request_2>;
     private logEmmitter?;
     constructor(client: Client, hooks?: any, logEmitter?: EventEmitter);
-    request(
-        {
-            document,
-            dataPath,
-            rootField,
-            typeName,
-            isList,
-            callsite,
-            rejectOnNotFound,
-            clientMethod,
-            engineHook,
-            args,
-            headers,
-            transaction,
-            unpacker,
-            extensions,
-            otelParentCtx,
-            otelChildCtx,
-        }: RequestParams,
-    ): Promise<object>;
+    request({ document, dataPath, rootField, typeName, isList, callsite, rejectOnNotFound, clientMethod, engineHook, args, headers, transaction, unpacker, extensions, otelParentCtx, otelChildCtx, }: RequestParams): Promise<object>;
     /**
      * Handles the error and logs it, logging the error is done synchronously waiting for the event
      * handlers to finish.
      */
-    handleAndLogRequestError(
-        { error, clientMethod, callsite, transaction }: HandleErrorParams,
-    ): never;
-    handleRequestError(
-        { error, clientMethod, callsite, transaction }: HandleErrorParams,
-    ): never;
+    handleAndLogRequestError({ error, clientMethod, callsite, transaction }: HandleErrorParams): never;
+    handleRequestError({ error, clientMethod, callsite, transaction }: HandleErrorParams): never;
     sanitizeMessage(message: any): any;
-    unpack(
-        document: any,
-        data: any,
-        path: any,
-        rootField: any,
-        unpacker?: Unpacker,
-    ): any;
-    applyResultExtensions(
-        { result, modelName, args, extensions }: ApplyExtensionsParams,
-    ): object;
+    unpack(document: any, data: any, path: any, rootField: any, unpacker?: Unpacker): any;
+    applyResultExtensions({ result, modelName, args, extensions }: ApplyExtensionsParams): object;
     get [Symbol.toStringTag](): string;
 }
 
@@ -2233,12 +1950,7 @@ declare type RequestParams = {
     otelChildCtx?: Context;
 };
 
-declare type RequiredArgs =
-    & NameArgs
-    & ResultArgs
-    & ModelArgs
-    & ClientArgs
-    & QueryOptions;
+declare type RequiredArgs = NameArgs & ResultArgs & ModelArgs & ClientArgs & QueryOptions;
 
 declare type ResultArgs = {
     result: {
@@ -2267,10 +1979,7 @@ declare type Selection_2 = Record<string, boolean | IncludeSelect>;
 export declare class Sql {
     values: Value[];
     strings: string[];
-    constructor(
-        rawStrings: ReadonlyArray<string>,
-        rawValues: ReadonlyArray<RawValue>,
-    );
+    constructor(rawStrings: ReadonlyArray<string>, rawValues: ReadonlyArray<RawValue>);
     get text(): string;
     get sql(): string;
     inspect(): {
@@ -2283,10 +1992,7 @@ export declare class Sql {
 /**
  * Create a SQL object from a template string.
  */
-export declare function sqltag(
-    strings: ReadonlyArray<string>,
-    ...values: RawValue[]
-): Sql;
+export declare function sqltag(strings: ReadonlyArray<string>, ...values: RawValue[]): Sql;
 
 declare type TracingConfig = {
     enabled: boolean;
@@ -2294,7 +2000,12 @@ declare type TracingConfig = {
 };
 
 declare namespace Transaction {
-    export { Info, IsolationLevel, Options, TransactionHeaders };
+    export {
+        IsolationLevel,
+        Options,
+        Info,
+        TransactionHeaders
+    }
 }
 
 declare type TransactionHeaders = {
@@ -2304,9 +2015,12 @@ declare type TransactionHeaders = {
 export declare function transformDocument(document: Document_2): Document_2;
 
 declare namespace Types {
-    export { Extensions_2 as Extensions, Utils };
+    export {
+        Extensions_2 as Extensions,
+        Utils
+    }
 }
-export { Types };
+export { Types }
 
 declare type UnknownErrorParams = {
     clientVersion: string;
@@ -2334,28 +2048,21 @@ declare type UserArgs = {
     [K in string]: UserArgsProp | UserArgsProp[];
 };
 
-declare type UserArgsProp =
-    | UserArgs
-    | string
-    | number
-    | boolean
-    | bigint
-    | null
-    | undefined;
+declare type UserArgsProp = UserArgs | string | number | boolean | bigint | null | undefined;
 
 declare namespace Utils {
     export {
-        Compute,
         EmptyToUnknown,
         NeverToUnknown,
-        Omit_2 as Omit,
-        OptionalFlat,
-        PatchDeep,
         PatchFlat,
-        PatchFlat3,
+        PatchDeep,
+        Omit_2 as Omit,
         Pick_2 as Pick,
-        ReadonlyDeep,
-    };
+        PatchFlat3,
+        Compute,
+        OptionalFlat,
+        ReadonlyDeep
+    }
 }
 
 /**
@@ -2365,4 +2072,4 @@ export declare type Value = unknown;
 
 export declare function warnEnvConflicts(envPaths: any): void;
 
-export {};
+export { }

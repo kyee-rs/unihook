@@ -10,13 +10,13 @@ datasource db {
 }
 
 model Pattern {
-  id      String @id @map("_id")
+  id      String  @id @map("_id")
   pattern String
-  User    User?  @relation(fields: [userId], references: [id])
+  User    User?   @relation(fields: [userId], references: [id])
   userId  Int?
 }
 
 model User {
-  id       Int       @id @map("_id")
+  id       Int    @id @map("_id")
   patterns Pattern[]
 }
