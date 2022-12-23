@@ -19,7 +19,7 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
 export type Pattern = {
   id: string
   pattern: string
-  userId: number | null
+  userId: string | null
 }
 
 /**
@@ -27,7 +27,7 @@ export type Pattern = {
  * 
  */
 export type User = {
-  id: number
+  id: string
 }
 
 
@@ -841,30 +841,20 @@ export namespace Prisma {
 
   export type AggregatePattern = {
     _count: PatternCountAggregateOutputType | null
-    _avg: PatternAvgAggregateOutputType | null
-    _sum: PatternSumAggregateOutputType | null
     _min: PatternMinAggregateOutputType | null
     _max: PatternMaxAggregateOutputType | null
-  }
-
-  export type PatternAvgAggregateOutputType = {
-    userId: number | null
-  }
-
-  export type PatternSumAggregateOutputType = {
-    userId: number | null
   }
 
   export type PatternMinAggregateOutputType = {
     id: string | null
     pattern: string | null
-    userId: number | null
+    userId: string | null
   }
 
   export type PatternMaxAggregateOutputType = {
     id: string | null
     pattern: string | null
-    userId: number | null
+    userId: string | null
   }
 
   export type PatternCountAggregateOutputType = {
@@ -874,14 +864,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type PatternAvgAggregateInputType = {
-    userId?: true
-  }
-
-  export type PatternSumAggregateInputType = {
-    userId?: true
-  }
 
   export type PatternMinAggregateInputType = {
     id?: true
@@ -945,18 +927,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PatternAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PatternSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PatternMinAggregateInputType
@@ -987,8 +957,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PatternCountAggregateInputType | true
-    _avg?: PatternAvgAggregateInputType
-    _sum?: PatternSumAggregateInputType
     _min?: PatternMinAggregateInputType
     _max?: PatternMaxAggregateInputType
   }
@@ -997,10 +965,8 @@ export namespace Prisma {
   export type PatternGroupByOutputType = {
     id: string
     pattern: string
-    userId: number | null
+    userId: string | null
     _count: PatternCountAggregateOutputType | null
-    _avg: PatternAvgAggregateOutputType | null
-    _sum: PatternSumAggregateOutputType | null
     _min: PatternMinAggregateOutputType | null
     _max: PatternMaxAggregateOutputType | null
   }
@@ -1907,26 +1873,16 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
-  export type UserAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type UserSumAggregateOutputType = {
-    id: number | null
-  }
-
   export type UserMinAggregateOutputType = {
-    id: number | null
+    id: string | null
   }
 
   export type UserMaxAggregateOutputType = {
-    id: number | null
+    id: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1934,14 +1890,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type UserAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type UserSumAggregateInputType = {
-    id?: true
-  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -1999,18 +1947,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: UserAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2041,18 +1977,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
 
 
   export type UserGroupByOutputType = {
-    id: number
+    id: string
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -3028,7 +2960,7 @@ export namespace Prisma {
     id?: StringFilter | string
     pattern?: StringFilter | string
     User?: XOR<UserRelationFilter, UserWhereInput> | null
-    userId?: IntNullableFilter | number | null
+    userId?: StringNullableFilter | string | null
   }
 
   export type PatternOrderByWithRelationInput = {
@@ -3047,10 +2979,8 @@ export namespace Prisma {
     pattern?: SortOrder
     userId?: SortOrder
     _count?: PatternCountOrderByAggregateInput
-    _avg?: PatternAvgOrderByAggregateInput
     _max?: PatternMaxOrderByAggregateInput
     _min?: PatternMinOrderByAggregateInput
-    _sum?: PatternSumOrderByAggregateInput
   }
 
   export type PatternScalarWhereWithAggregatesInput = {
@@ -3059,14 +2989,14 @@ export namespace Prisma {
     NOT?: Enumerable<PatternScalarWhereWithAggregatesInput>
     id?: StringWithAggregatesFilter | string
     pattern?: StringWithAggregatesFilter | string
-    userId?: IntNullableWithAggregatesFilter | number | null
+    userId?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type UserWhereInput = {
     AND?: Enumerable<UserWhereInput>
     OR?: Enumerable<UserWhereInput>
     NOT?: Enumerable<UserWhereInput>
-    id?: IntFilter | number
+    id?: StringFilter | string
     patterns?: PatternListRelationFilter
   }
 
@@ -3076,23 +3006,21 @@ export namespace Prisma {
   }
 
   export type UserWhereUniqueInput = {
-    id?: number
+    id?: string
   }
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
     AND?: Enumerable<UserScalarWhereWithAggregatesInput>
     OR?: Enumerable<UserScalarWhereWithAggregatesInput>
     NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
-    id?: IntWithAggregatesFilter | number
+    id?: StringWithAggregatesFilter | string
   }
 
   export type PatternCreateInput = {
@@ -3104,7 +3032,7 @@ export namespace Prisma {
   export type PatternUncheckedCreateInput = {
     id: string
     pattern: string
-    userId?: number | null
+    userId?: string | null
   }
 
   export type PatternUpdateInput = {
@@ -3114,13 +3042,13 @@ export namespace Prisma {
 
   export type PatternUncheckedUpdateInput = {
     pattern?: StringFieldUpdateOperationsInput | string
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PatternCreateManyInput = {
     id: string
     pattern: string
-    userId?: number | null
+    userId?: string | null
   }
 
   export type PatternUpdateManyMutationInput = {
@@ -3129,16 +3057,16 @@ export namespace Prisma {
 
   export type PatternUncheckedUpdateManyInput = {
     pattern?: StringFieldUpdateOperationsInput | string
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateInput = {
-    id: number
+    id: string
     patterns?: PatternCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
-    id: number
+    id: string
     patterns?: PatternUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -3151,7 +3079,7 @@ export namespace Prisma {
   }
 
   export type UserCreateManyInput = {
-    id: number
+    id: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -3182,25 +3110,25 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type IntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
+  export type StringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableFilter | string | null
     isSet?: boolean
   }
 
   export type PatternCountOrderByAggregateInput = {
     id?: SortOrder
     pattern?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type PatternAvgOrderByAggregateInput = {
     userId?: SortOrder
   }
 
@@ -3213,10 +3141,6 @@ export namespace Prisma {
   export type PatternMinOrderByAggregateInput = {
     id?: SortOrder
     pattern?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type PatternSumOrderByAggregateInput = {
     userId?: SortOrder
   }
 
@@ -3238,32 +3162,23 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
-  export type IntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
     isSet?: boolean
-  }
-
-  export type IntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
   }
 
   export type PatternListRelationFilter = {
@@ -3280,36 +3195,12 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type UserAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntWithAggregatesFilter | number
-    _count?: NestedIntFilter
-    _avg?: NestedFloatFilter
-    _sum?: NestedIntFilter
-    _min?: NestedIntFilter
-    _max?: NestedIntFilter
   }
 
   export type UserCreateNestedOneWithoutPatternsInput = {
@@ -3332,12 +3223,8 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutPatternsInput, UserUncheckedUpdateWithoutPatternsInput>
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
     unset?: boolean
   }
 
@@ -3397,15 +3284,18 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
-  export type NestedIntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
+  export type NestedStringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
     isSet?: boolean
   }
 
@@ -3437,24 +3327,25 @@ export namespace Prisma {
     not?: NestedIntFilter | number
   }
 
-  export type NestedIntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
     isSet?: boolean
   }
 
-  export type NestedFloatNullableFilter = {
+  export type NestedIntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
     notIn?: Enumerable<number> | null
@@ -3462,43 +3353,16 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedFloatNullableFilter | number | null
+    not?: NestedIntNullableFilter | number | null
     isSet?: boolean
-  }
-
-  export type NestedIntWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntWithAggregatesFilter | number
-    _count?: NestedIntFilter
-    _avg?: NestedFloatFilter
-    _sum?: NestedIntFilter
-    _min?: NestedIntFilter
-    _max?: NestedIntFilter
-  }
-
-  export type NestedFloatFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatFilter | number
   }
 
   export type UserCreateWithoutPatternsInput = {
-    id: number
+    id: string
   }
 
   export type UserUncheckedCreateWithoutPatternsInput = {
-    id: number
+    id: string
   }
 
   export type UserCreateOrConnectWithoutPatternsInput = {
@@ -3560,7 +3424,7 @@ export namespace Prisma {
     NOT?: Enumerable<PatternScalarWhereInput>
     id?: StringFilter | string
     pattern?: StringFilter | string
-    userId?: IntNullableFilter | number | null
+    userId?: StringNullableFilter | string | null
   }
 
   export type PatternCreateManyUserInput = {

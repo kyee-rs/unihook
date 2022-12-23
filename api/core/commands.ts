@@ -8,8 +8,8 @@ commands.use(async (ctx, next) => {
     if (!ctx.from) {
         return ctx.reply('🚫 You are not authorized to use this bot.');
     }
-    if (!(await database.getUser(ctx.from.id))) {
-        await database.createUser(ctx.from.id);
+    if (!(await database.getUser(ctx.from.id.toString()))) {
+        await database.createUser(ctx.from.id.toString());
     }
     await next();
 });
@@ -27,7 +27,7 @@ commands.command('cancel', async (ctx) => {
 });
 
 commands.command('delete', async (ctx) => {
-    if ((await database.getPatterns(ctx.from!.id)).length === 0) {
+    if ((await database.getPatterns(ctx.from!.id.toString())).length === 0) {
         return await ctx.reply(
             '🚫 You have *no* patterns. Use /add to add a pattern.',
         );
@@ -40,15 +40,15 @@ commands.command('delete', async (ctx) => {
 commands.command('delete_all', async (ctx) => {
     await ctx.reply(
         `☑️ Successfully deleted ${
-            (await database.getPatterns(ctx.from!.id)).length
+            (await database.getPatterns(ctx.from!.id.toString())).length
         } patterns.`,
     );
-    await database.deleteAllPatterns(ctx.from!.id);
+    await database.deleteAllPatterns(ctx.from!.id.toString());
     await database.close();
 });
 
 commands.command('list', async (ctx) => {
-    const patterns = await database.getPatterns(ctx.from!.id);
+    const patterns = await database.getPatterns(ctx.from!.id.toString());
     await database.close();
     if (patterns.length === 0) {
         return await ctx.reply(

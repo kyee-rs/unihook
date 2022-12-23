@@ -13,19 +13,19 @@ export class Database extends PrismaClient {
         await this.$disconnect();
     }
 
-    async getUser(id: number) {
+    async getUser(id: string) {
         return await this.user.findUnique({ where: { id } });
     }
 
-    async createUser(id: number) {
+    async createUser(id: string) {
         return await this.user.create({ data: { id } });
     }
 
-    async getPatterns(id: number) {
+    async getPatterns(id: string) {
         return await this.pattern.findMany({ where: { userId: id } });
     }
 
-    async createPattern(id: string, pattern: string, userId: number) {
+    async createPattern(id: string, pattern: string, userId: string) {
         return await this.pattern.create({
             data: {
                 id,
@@ -43,7 +43,7 @@ export class Database extends PrismaClient {
         return await this.pattern.delete({ where: { id } });
     }
 
-    async deleteAllPatterns(id: number) {
+    async deleteAllPatterns(id: string) {
         return await this.pattern.deleteMany({ where: { userId: id } });
     }
 

@@ -1,13 +1,12 @@
-import { Menu, MenuRange } from '../../dependencies.deno.ts';
-import { toHashString } from '../../dependencies.deno.ts';
+import { Menu, MenuRange, toHashString } from '../../dependencies.deno.ts';
 import { database } from '../edge.ts';
 import { MyContext, MyConversation } from '../types/bot.d.ts';
 export async function add(conversation: MyConversation, ctx: MyContext) {
     if (!ctx.from?.id) {
         return ctx.reply('Failed to read your id. Try again later.');
     }
-    if (!(await database.getUser(ctx.from.id))) {
-        await database.createUser(ctx.from.id);
+    if (!(await database.getUser(ctx.from.id.toString()))) {
+        await database.createUser(ctx.from.id.toString());
     }
 
     await ctx.reply(
@@ -28,7 +27,7 @@ export async function add(conversation: MyConversation, ctx: MyContext) {
     await database.createPattern(
         id.message.text,
         pattern.message.text,
-        ctx.from!.id,
+        ctx.from!.id.toString(),
     );
     await database.close();
 
@@ -59,7 +58,7 @@ export async function add(conversation: MyConversation, ctx: MyContext) {
 export const deleteMenu = new Menu('deleteMenu')
     .dynamic(async (ctx) => {
         const range = new MenuRange();
-        for (const pattern of await database.getPatterns(ctx.from!.id)) {
+        for (const pattern of await database.getPatterns(ctx.from!.id.toString())) {
             range
                 .text(pattern.id, async (ctx) => {
                     ctx.reply(
