@@ -13,10 +13,10 @@ model Pattern {
   id      String  @id @map("_id")
   pattern String
   User    User?   @relation(fields: [userId], references: [id])
-  userId  String?
+  userId  Int?
 }
 
 model User {
-  id       String    @id @map("_id")
+  id       Int    @id @map("_id")
   patterns Pattern[]
 }
