@@ -1,5 +1,5 @@
-import { Menu, MenuRange } from 'grammy/menu';
-import { toHashString } from 'https://deno.land/std@0.170.0/crypto/util.ts';
+import { Menu, MenuRange } from '../../dependencies.deno.ts';
+import { toHashString } from '../../dependencies.deno.ts';
 import { database } from '../edge.ts';
 import { MyContext, MyConversation } from '../types/bot.d.ts';
 export async function add(conversation: MyConversation, ctx: MyContext) {

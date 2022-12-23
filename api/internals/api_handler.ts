@@ -1,8 +1,4 @@
-import {
-    crypto,
-    toHashString,
-} from 'https://deno.land/std@0.170.0/crypto/mod.ts';
-import { RouterContext } from 'oak';
+import { crypto, RouterContext, toHashString } from '../../dependencies.deno.ts';
 import { bot } from '../core/bot.ts';
 import { database } from '../edge.ts';
 export const handle = async (
@@ -23,7 +19,7 @@ export const handle = async (
         ctx.response.body = '400: Missing ID.';
         return;
     }
-    if (isNaN(<any> ctx.params.id)) {
+    if (isNaN(<any>ctx.params.id)) {
         ctx.response.status = 400;
         ctx.response.body =
             '400: Invalid ID, check your request and try again later.';

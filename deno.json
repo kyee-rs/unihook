@@ -11,11 +11,15 @@
             ]
         }
     },
-    "importMap": "./import-map.json",
     "lint": {
         "files": {
             "include": [
                 "./api/**/*.ts"
+            ]
+        },
+        "rules": {
+            "exclude": [
+                "no-explicit-any"
             ]
         }
     },

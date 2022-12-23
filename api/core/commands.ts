@@ -1,4 +1,4 @@
-import { Composer, InlineKeyboard } from 'grammy';
+import { Composer, InlineKeyboard } from '../../dependencies.deno.ts';
 import { database } from '../edge.ts';
 import { deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';

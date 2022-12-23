@@ -1,5 +1,5 @@
-import { webhookCallback } from 'grammy';
-import { Application, Router } from 'oak';
+import { webhookCallback } from '../dependencies.deno.ts';
+import { Application, Router } from '../dependencies.deno.ts';
 import { bot } from './core/bot.ts';
 import { handle } from './internals/api_handler.ts';
 import { Database } from './internals/database.ts';

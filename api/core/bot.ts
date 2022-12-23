@@ -1,7 +1,7 @@
-import { Bot, session } from 'grammy';
-import { autoRetry } from 'grammy/autoretry';
-import { conversations, createConversation } from 'grammy/convs';
-import { hydrateReply, parseMode } from 'grammy/pm';
+import { Bot, session } from '../../dependencies.deno.ts';
+import { autoRetry } from '../../dependencies.deno.ts';
+import { conversations, createConversation } from '../../dependencies.deno.ts';
+import { hydrateReply, parseMode } from '../../dependencies.deno.ts';
 import { add, deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';
 import { commands } from './commands.ts';
