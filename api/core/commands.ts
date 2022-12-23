@@ -4,6 +4,16 @@ import { deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';
 export const commands = new Composer<MyContext>();
 
+commands.use(async (ctx, next) => { 
+    if (!ctx.from) {
+        return ctx.reply('🚫 You are not authorized to use this bot.');
+    }
+    if (!(await database.getUser(ctx.from.id))) {
+        await database.createUser(ctx.from.id);
+    }
+    await next();
+})
+
 commands.command('add', async (ctx) => {
     await ctx.conversation.enter('add');
 });
@@ -28,9 +38,6 @@ commands.command('delete', async (ctx) => {
 });
 
 commands.command('delete_all', async (ctx) => {
-    if (!(await database.getUser(ctx.from!.id))) {
-        await database.createUser(ctx.from!.id);
-    }
     await ctx.reply(
         `☑️ Successfully deleted ${
             (await database.getPatterns(ctx.from!.id)).length
@@ -41,9 +48,6 @@ commands.command('delete_all', async (ctx) => {
 });
 
 commands.command('list', async (ctx) => {
-    if (!(await database.getUser(ctx.from!.id))) {
-        await database.createUser(ctx.from!.id);
-    }
     const patterns = await database.getPatterns(ctx.from!.id);
     await database.close();
     if (patterns.length === 0) {
