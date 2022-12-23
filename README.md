@@ -3,6 +3,10 @@
 > ⚠ WARNING: See [Deno branch](https://github.com/voxelin/unihook/tree/deno/)
 > for free hosting on Deno Deploy.
 
+## This branch specific
+
+This branch is exact the same bot, but made on Node - TypeScript. Use this branch to host bot on a VPS.
+
 ## What is UniHook?
 
 UniHook is a simple webhook handler for Telegram. It allows you to parse webhook
