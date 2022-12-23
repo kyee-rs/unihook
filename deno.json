@@ -1,0 +1,27 @@
+{
+    "importMap": "./import-map.json",
+    "fmt": {
+        "options": {
+            "lineWidth": 80,
+            "indentWidth": 4
+        },
+        "files": {
+            "include": [
+                "src/**/*.ts",
+                "test/**/*.ts"
+            ]
+        }
+    },
+    "lint": {
+        "report": "pretty",
+        "files": {
+            "include": [
+                "src/**/*.ts"
+            ]
+        }
+    },
+    "tasks": {
+        "local": "deno run --allow-net --allow-read --allow-env src/local.ts",
+        "server": "deno run --allow-net --allow-read --allow-env src/server.ts"
+    }
+}
