@@ -36,7 +36,7 @@ export async function add(conversation: MyConversation, ctx: MyContext) {
     await ctx.reply(
         `Webhook URL: \n\n\`${
             encodeURI(
-                'https://hook.ieljit.lol/' +
+                'https://volx.deno.dev/' +
                     ctx.from.id +
                     '/' +
                     toHashString(

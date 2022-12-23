@@ -12,6 +12,8 @@ UniHook is a simple webhook handler for Telegram. It allows you to create a webh
 4. Open `https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={DEPLOY_URL}/bot/{BOT_TOKEN}` to set the webhook. Replace `{BOT_TOKEN}` with your bot token and `{DEPLOY_URL}` with the URL of your deploy.
 5. You're done! You can now use UniHook.
 
+> ⚠ WARNING: If you are using Deno Deploy, you must use the Prisma Data Proxy. It's because edge limits query execution time. You can find more information about the Prisma Data Proxy [here](https://www.prisma.io/docs/data-platform/data-proxy/use-data-proxy).
+
 ## 👏 Credits
 
 - [grammY](https://grammy.dev) - The framework used to create UniHook.
