@@ -1,18 +1,14 @@
 {
-  "name": "my-prisma-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "prisma": "^4.8.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^4.8.0"
-  }
+    "name": "my-prisma-project",
+    "version": "0.0.0",
+    "description": "This project.json is only for prisma support",
+    "main": "./api/edge.ts",
+    "author": "Jenny Poulson",
+    "license": "ISC",
+    "devDependencies": {
+        "prisma": "^4.8.0"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.8.0"
+    }
 }

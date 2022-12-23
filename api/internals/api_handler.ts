@@ -1,70 +1,143 @@
-import { createHash } from "crypto";
-import { Request, Response } from "express";
-import { bot } from "../bot";
-import { database } from "../server";
-
-export const handle = async (req: Request, res: Response) => {
-    if (!req.params.id) return res.status(400).send("Missing id");
-    if (isNaN(<any>req.params.id)) return res.status(400).send("Invalid token");
-    if (!req.params.token) return res.status(400).send("Missing token");
-    if (!req.params.hookid) return res.status(400).send("Missing hookid");
+import {
+    crypto,
+    toHashString,
+} from 'https://deno.land/std@0.170.0/crypto/mod.ts';
+import { RouterContext } from 'oak';
+import { bot } from '../core/bot.ts';
+import { database } from '../edge.ts';
+export const handle = async (
+    ctx: RouterContext<
+        '/hook/:id/:token/:webhook_id',
+        {
+            id: string;
+        } & {
+            token: string;
+        } & {
+            webhook_id: string;
+        } & Record<string | number, string | undefined>,
+        Record<string, any>
+    >,
+) => {
+    if (!ctx.params.id) {
+        ctx.response.status = 400;
+        ctx.response.body = '400: Missing ID.';
+        return;
+    }
+    if (isNaN(<any> ctx.params.id)) {
+        ctx.response.status = 400;
+        ctx.response.body =
+            '400: Invalid ID, check your request and try again later.';
+        return;
+    }
+    if (!ctx.params.token) {
+        ctx.response.status = 400;
+        ctx.response.body = '400: Missing token in your request.';
+        return;
+    }
+    if (!ctx.params.webhook_id) {
+        ctx.response.status = 400;
+        ctx.response.body = '400: Missing webhook id in your request.';
+        return;
+    }
     if (
-        req.params.token !==
-        createHash("sha256")
-            .update(req.params.id + process.env.WEBHOOK_SECRET)
-            .digest("hex")
-    )
-        return res.status(400).send("Invalid token");
-    const data = req.body;
-    if (!data) return res.status(400).send("Missing payload");
-    await database.getUser(parseInt(req.params.id)).then(async (user) => {
-        if (!user) return res.status(400).send("Invalid user");
+        ctx.params.token !==
+            toHashString(
+                await crypto.subtle.digest(
+                    'SHA-256',
+                    new TextEncoder().encode(
+                        ctx.params.id +
+                            (Deno.env.get('WEBHOOK_SECRET') ||
+                                '0xIFORGOTTOSETWEBHOOKSECRET'),
+                    ),
+                ),
+            )
+    ) {
+        ctx.response.status = 400;
+        ctx.response.body =
+            '400: Invalid token, check your request and try again later.';
+        return;
+    }
+    if (!ctx.request.hasBody) {
+        ctx.response.status = 400;
+        ctx.response.body = '400: Missing request payload.';
+        return;
+    }
+    const data = await ctx.request.body({ 'type': 'json' }).value;
+    await database.getUser(parseInt(ctx.params.id)).then(async (user) => {
+        if (!user) {
+            ctx.response.status = 400;
+            ctx.response.body = '400: Invalid user.';
+            return;
+        }
         await database
-            .getPattern(req.params.hookid)
+            .getPattern(ctx.params.webhook_id)
             .then(async (webhook) => {
-                if (!webhook) return res.status(400).send("Invalid webhook");
+                if (!webhook) {
+                    ctx.response.status = 400;
+                    ctx.response.body =
+                        '400: Invalid webhook, check your request and try again later.';
+                    return;
+                }
                 let message = webhook.pattern;
-                if (!message) return res.status(400).send("Invalid webhook");
+                if (!message) {
+                    ctx.response.status = 400;
+                    ctx.response.body =
+                        '400: Invalid webhook, check your request and try again later.';
+                    return;
+                }
                 try {
-                    if (message === "{}") {
-                        await bot.api.sendMessage(req.params.id, `\`\`\`\n${JSON.stringify(data, null, 4)}\n\`\`\``);
-                        return res.status(200).send("ok");
+                    if (message === '{}') {
+                        await bot.api.sendMessage(
+                            ctx.params.id,
+                            `\`\`\`\n${JSON.stringify(data, null, 4)}\n\`\`\``,
+                        );
+                        ctx.response.status = 200;
+                        ctx.response.body = '200: OK.';
+                        return;
                     }
                     const regex = /{([^}]+)}/g;
                     const matches = message.match(regex);
                     if (matches) {
                         for (const match of matches) {
-                            const key = match.replace("{", "").replace("}", "");
-                            if (key.includes(".")) {
-                                const keys = key.split(".");
+                            const key = match.replace('{', '').replace('}', '');
+                            if (key.includes('.')) {
+                                const keys = key.split('.');
                                 let value = data;
                                 for (const key of keys) {
-                                    value = value[key] ?? "";
+                                    value = value[key] ?? '';
                                 }
                                 message = message.replace(match, value);
-                            } else if (key.includes("[")) {
-                                const keys = key.split("[");
+                            } else if (key.includes('[')) {
+                                const keys = key.split('[');
                                 let value = data;
                                 for (const key of keys) {
-                                    value = value[key.replace("]", "")];
+                                    value = value[key.replace(']', '')];
                                 }
-                                message = message.replace(match, value ?? "");
+                                message = message.replace(match, value ?? '');
                             } else {
-                                message = message.replace(match, data[key] ?? "<undefined>");
+                                message = message.replace(
+                                    match,
+                                    data[key] ?? '<undefined>',
+                                );
                             }
                         }
                     }
-                    await bot.api.sendMessage(req.params.id, message);
-                    res.send("ok");
+                    await bot.api.sendMessage(ctx.params.id, message);
+                    ctx.response.body = 'ok';
                 } catch (e) {
                     console.error(e);
-                    res.status(500).send("Internal server error");
+                    ctx.response.status = 500;
+                    ctx.response.body =
+                        '500: Internal server error. Try again later.';
+                    return;
                 }
             })
             .then(() => database.close())
             .catch((e) => {
                 console.error(e);
-                res.status(500).send("Internal server error");
+                ctx.response.status = 500;
+                ctx.response.body =
+                    '500: Internal server error. Try again later.';
                 database.close();
             });
     });

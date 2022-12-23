@@ -1,6 +1,4 @@
 node_modules
-build
-.deta
+# Keep environment variables out of version control
 .env
-.vscode
 generated

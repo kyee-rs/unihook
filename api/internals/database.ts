@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '../../generated/client/deno/edge.ts';
+
 export class Database extends PrismaClient {
     constructor() {
         super();

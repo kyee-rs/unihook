@@ -1,27 +1,27 @@
 {
-    "importMap": "./import-map.json",
     "fmt": {
         "options": {
+            "indentWidth": 4,
             "lineWidth": 80,
-            "indentWidth": 4
+            "singleQuote": true
         },
         "files": {
             "include": [
-                "src/**/*.ts",
-                "test/**/*.ts"
+                "./api/**/*.ts"
             ]
         }
     },
+    "importMap": "./import-map.json",
     "lint": {
-        "report": "pretty",
         "files": {
             "include": [
-                "src/**/*.ts"
+                "./api/**/*.ts"
             ]
         }
     },
     "tasks": {
-        "local": "deno run --allow-net --allow-read --allow-env src/local.ts",
-        "server": "deno run --allow-net --allow-read --allow-env src/server.ts"
-    }
+        "edge": "deno run --allow-net --allow-env ./api/edge.ts",
+        "local": "deno run --allow-net --allow-env ./api/local.ts"
+    },
+    "lock": true
 }
