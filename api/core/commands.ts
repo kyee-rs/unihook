@@ -18,7 +18,7 @@ commands.command('add', async (ctx) => {
     await ctx.conversation.enter('add');
 });
 
-commands.command('exit', async (ctx) => {
+commands.command('cancel', async (ctx) => {
     await ctx.conversation.exit();
     await ctx.reply('🚫 Canceled.', {
         reply_to_message_id: ctx.message?.message_id,
