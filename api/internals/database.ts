@@ -13,19 +13,23 @@ export class Database extends PrismaClient {
         await this.$disconnect();
     }
 
-    async getUser(id: string) {
+    async getUser(_id: number) {
+        let id = _id.toString()
         return await this.user.findUnique({ where: { id } });
     }
 
-    async createUser(id: string) {
+    async createUser(_id: number) {
+        let id = _id.toString()
         return await this.user.create({ data: { id } });
     }
 
-    async getPatterns(id: string) {
+    async getPatterns(_id: number) {
+        let id = _id.toString()
         return await this.pattern.findMany({ where: { userId: id } });
     }
 
-    async createPattern(id: string, pattern: string, userId: string) {
+    async createPattern(id: string, pattern: string, _userId: number) {
+        let userId = _userId.toString()
         return await this.pattern.create({
             data: {
                 id,
@@ -43,7 +47,8 @@ export class Database extends PrismaClient {
         return await this.pattern.delete({ where: { id } });
     }
 
-    async deleteAllPatterns(id: string) {
+    async deleteAllPatterns(_id: number) {
+        let id = _id.toString()
         return await this.pattern.deleteMany({ where: { userId: id } });
     }
 

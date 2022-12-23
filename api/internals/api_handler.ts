@@ -3,8 +3,7 @@ import {
     RouterContext,
     toHashString
 } from '../../dependencies.deno.ts';
-import { bot } from '../core/bot.ts';
-import { database } from '../edge.ts';
+import { bot, database } from '../core/bot.ts';
 export const handle = async (
     ctx: RouterContext<
         '/:id/:token/:webhook_id',
@@ -63,7 +62,7 @@ export const handle = async (
         return;
     }
     const data = await ctx.request.body({ 'type': 'json' }).value;
-    await database.getUser(ctx.params.id).then(async (user) => {
+    await database.getUser(parseInt(ctx.params.id)).then(async (user) => {
         if (!user) {
             ctx.response.status = 400;
             ctx.response.body = '400: Invalid user.';

@@ -1,10 +1,9 @@
-import { Bot, session } from '../../dependencies.deno.ts';
-import { autoRetry } from '../../dependencies.deno.ts';
-import { conversations, createConversation } from '../../dependencies.deno.ts';
-import { hydrateReply, parseMode } from '../../dependencies.deno.ts';
+import { autoRetry, Bot, conversations, createConversation, hydrateReply, parseMode, session } from '../../dependencies.deno.ts';
 import { add, deleteMenu } from '../internals/conversations.ts';
+import { Database } from '../internals/database.ts';
 import { MyContext } from '../types/bot.d.ts';
 import { commands } from './commands.ts';
+export const database = new Database();
 export const bot = new Bot<MyContext>(Deno.env.get('BOT_TOKEN')!, {
     botInfo: {
         id: 5889865725,

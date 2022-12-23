@@ -1,9 +1,6 @@
-import { webhookCallback } from '../dependencies.deno.ts';
-import { Application, Router } from '../dependencies.deno.ts';
+import { Application, Router, webhookCallback } from '../dependencies.deno.ts';
 import { bot } from './core/bot.ts';
 import { handle } from './internals/api_handler.ts';
-import { Database } from './internals/database.ts';
-export const database = new Database();
 const webParser = new Router()
     .redirect('/', `https://${bot.botInfo.username}.t.me`)
     .post(
