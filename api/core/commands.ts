@@ -62,7 +62,7 @@ commands.command('list', async (ctx) => {
 commands.command('start', async (ctx) => {
     const inline = new InlineKeyboard().url(
         'Source code 🇺🇦',
-        'https://github.com/voxelin/unihook/tree/deno',
+        'https://github.com/voxelin/unihook',
     );
     await ctx.reply(
         'Welcome! I am *Universal Webhook Bot* 🇺🇦.\nI can send you templated messages when a webhook is triggered.\nTo get started, add a webhook handler using /add.',
