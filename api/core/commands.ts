@@ -25,14 +25,6 @@ commands.command('add', async (ctx) => {
     await ctx.conversation.enter('add');
 });
 
-commands.command('cancel', async (ctx) => {
-    await ctx.conversation.exit();
-    await ctx.reply('🚫 Canceled.', {
-        reply_to_message_id: ctx.message?.message_id,
-        reply_markup: { remove_keyboard: true },
-    });
-});
-
 commands.command('delete', async (ctx) => {
     if ((await database.getPatterns(ctx.from!.id)).length === 0) {
         return await ctx.reply(
