@@ -1,7 +1,7 @@
 import {
     crypto,
     RouterContext,
-    toHashString
+    toHashString,
 } from '../../dependencies.deno.ts';
 import { bot, database } from '../core/bot.ts';
 export const handle = async (

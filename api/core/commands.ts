@@ -1,8 +1,15 @@
-import { Composer, InlineKeyboard } from '../../dependencies.deno.ts';
-import { deleteMenu } from '../internals/conversations.ts';
+import {
+    Composer,
+    createConversation,
+    InlineKeyboard,
+} from '../../dependencies.deno.ts';
+import { add, deleteMenu } from '../internals/conversations.ts';
 import { MyContext } from '../types/bot.d.ts';
 import { database } from './bot.ts';
 export const commands = new Composer<MyContext>();
+
+commands.use(createConversation(add));
+commands.use(deleteMenu);
 
 commands.use(async (ctx, next) => {
     if (!ctx.from) {
@@ -40,7 +47,9 @@ commands.command('delete', async (ctx) => {
 commands.command('delete_all', async (ctx) => {
     await ctx.reply(
         `☑️ Successfully deleted ${
-            (await database.getPatterns(ctx.from!.id)).length
+            (
+                await database.getPatterns(ctx.from!.id)
+            ).length
         } patterns.`,
     );
     await database.deleteAllPatterns(ctx.from!.id);

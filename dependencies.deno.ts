@@ -10,7 +10,7 @@ export {
     session,
     type SessionFlavor,
     webhookCallback,
-} from 'https://deno.land/x/grammy@v1.12.1/mod.ts';
+} from 'https://deno.land/x/grammy@v1.13.0/mod.ts';
 export {
     type Conversation,
     type ConversationFlavor,

@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/client/deno/edge.ts';
+import { PrismaClient } from "../../generated/client/deno/edge.ts";
 
 export class Database extends PrismaClient {
     constructor() {
@@ -14,22 +14,22 @@ export class Database extends PrismaClient {
     }
 
     async getUser(_id: number) {
-        let id = _id.toString()
+        const id = _id.toString();
         return await this.user.findUnique({ where: { id } });
     }
 
     async createUser(_id: number) {
-        let id = _id.toString()
+        const id = _id.toString();
         return await this.user.create({ data: { id } });
     }
 
     async getPatterns(_id: number) {
-        let id = _id.toString()
+        const id = _id.toString();
         return await this.pattern.findMany({ where: { userId: id } });
     }
 
     async createPattern(id: string, pattern: string, _userId: number) {
-        let userId = _userId.toString()
+        const userId = _userId.toString();
         return await this.pattern.create({
             data: {
                 id,
@@ -48,7 +48,7 @@ export class Database extends PrismaClient {
     }
 
     async deleteAllPatterns(_id: number) {
-        let id = _id.toString()
+        const id = _id.toString();
         return await this.pattern.deleteMany({ where: { userId: id } });
     }
 

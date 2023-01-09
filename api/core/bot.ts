@@ -1,5 +1,11 @@
-import { autoRetry, Bot, conversations, createConversation, hydrateReply, parseMode, session } from '../../dependencies.deno.ts';
-import { add, deleteMenu } from '../internals/conversations.ts';
+import {
+    autoRetry,
+    Bot,
+    conversations,
+    hydrateReply,
+    parseMode,
+    session,
+} from '../../dependencies.deno.ts';
 import { Database } from '../internals/database.ts';
 import { MyContext } from '../types/bot.d.ts';
 import { commands } from './commands.ts';
@@ -30,8 +36,6 @@ bot.use(
     }),
 );
 bot.use(conversations());
-bot.use(createConversation(add));
-bot.use(deleteMenu);
 bot.use(commands);
 
 await bot.init();
