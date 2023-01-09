@@ -8,6 +8,14 @@ import { MyContext } from '../types/bot.d.ts';
 import { database } from './bot.ts';
 export const commands = new Composer<MyContext>();
 
+commands.command('cancel', async (ctx) => {
+    await ctx.conversation.exit();
+    await ctx.reply('🚫 Canceled.', {
+        reply_to_message_id: ctx.message?.message_id,
+        reply_markup: { remove_keyboard: true },
+    });
+});
+
 commands.use(createConversation(add));
 commands.use(deleteMenu);
 
