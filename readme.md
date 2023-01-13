@@ -2,29 +2,17 @@
 
 ## 📝 Description
 
-UniHook is a simple webhook handler for Telegram. It allows you to create a
-webhook for your bot and receive updates from Telegram. It is written in Deno
-and uses the [grammY](https://grammy.dev) framework. This branch differs from
-the main branch in that it uses Deno Deploy instead of a VPS. This means that
-you can use UniHook for free.
+UniHook is a free webhook handler for Telegram, powered by Deno and the grammY framework. It enables you to create a webhook for your bot and receive updates from Telegram quickly and easily. Unlike the main branch, this branch uses Deno Deploy instead of a VPS, meaning that you can use UniHook at no cost.
 
 ## 🚀 Deploy
 
-1. Click
-   [here](https://dash.deno.com/new?url=https://raw.githubusercontent.com/voxelin/unihook/master/api/edge.ts&env=BOT_TOKEN,DATABASE_URL,WEBHOOK_SECRET)
-   to deploy UniHook to Deno Deploy.
-2. Enter the bot token, database URL and webhook secret in the environment
-   variables.
-3. Click "Deploy".
-4. Open
-   `https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={DEPLOY_URL}/bot/{BOT_TOKEN}`
-   to set the webhook. Replace `{BOT_TOKEN}` with your bot token and
-   `{DEPLOY_URL}` with the URL of your deploy.
-5. You're done! You can now use UniHook.
+1. Click [here](https://dash.deno.com/new?url=https://raw.githubusercontent.com/voxelin/unihook/master/api/edge.ts&env=BOT_TOKEN,DATABASE_URL,WEBHOOK_SECRET) to deploy UniHook to Deno Deploy.
+2. Enter your bot token, database URL, and webhook secret into the environment variables, then click "Deploy". 
+3. Once you've done that, open `https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={DEPLOY_URL}/bot/{BOT_TOKEN}`, replacing `{BOT_TOKEN}` with your own bot token and `{DEPLOY_URL}` with your own deploy URL.
+4. You're all set - you can now use UniHook!
 
-> ⚠ WARNING: If you are using Deno Deploy, you must use the Prisma Data Proxy.
-> It's because edge limits query execution time. You can find more information
-> about the Prisma Data Proxy
+> ⚠ WARNING: If you are using Deno Deploy, you must use the Prisma Data Proxy due to edge limits on query execution time.
+> For more information about the Prisma Data Proxy, please refer to the relevant documentation
 > [here](https://www.prisma.io/docs/data-platform/data-proxy/use-data-proxy).
 
 ## 👏 Credits
