@@ -2,7 +2,7 @@
 
 ## 📝 Description
 
-UniHook is a free webhook handler for Telegram, powered by Deno and the grammY framework. It enables you to create a webhook for your bot and receive updates from Telegram quickly and easily. Unlike the main branch, this branch uses Deno Deploy instead of a VPS, meaning that you can use UniHook at no cost.
+UniHook is a free webhook handler for Telegram, powered by Deno and the grammY framework. It enables you to create a webhook listener on your webserver and receive updates in Telegram quickly and easily. Unlike the main branch, this branch uses Deno Deploy instead of a VPS, meaning that you can use UniHook at no cost.
 
 ## 🚀 Deploy
 
