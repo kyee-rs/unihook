@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "description": "This project.json is only for prisma support",
     "main": "./api/edge.ts",
-    "author": "Saputskiy Petro",
+    "author": "Saputskyi Petro",
     "license": "ISC",
     "devDependencies": {
         "prisma": "^4.8.0"
